@@ -120,8 +120,20 @@ export default {
 ```
 npm i node-sass sass-loader -D
 ```
-
-
+## viewport设置和rem设置
+viewport设置
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+```
+rem设置
+```js
+document.addEventListener('DOMContentLoaded', () => {
+  const html = document.querySelector('html')
+  let fontSize = window.innerWidth / 10
+  fontSize = fontSize > 50 ? 50 : fontSize
+  html.style.fontSize = fontSize + 'px'
+})
+```
 
 
 项目难点：
