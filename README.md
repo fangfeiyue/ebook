@@ -116,6 +116,26 @@ export default {
 </script>
 ```
 
+安装sass
+```
+npm i node-sass sass-loader -D
+```
 
-项目难点：分页算法、全文搜索算法、引入web字体、主题设计
+
+
+
+项目难点：
+
+阅读器开发：分页算法、全文搜索算法、引入web字体、主题设计
+
+离线存储机制设计：localstorage+indexedDB
+
+实现复杂手势和交互动画，如何兼容手势和鼠标操作
+
+利用vuex+minx机制实现组件解耦+复用 
+
+利用es6优雅的实现数据结构变化
+
+
+
 

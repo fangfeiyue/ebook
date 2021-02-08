@@ -1,5 +1,9 @@
 <template>
-  <div id="book"></div>
+  <div id="book">
+    <span class="icon-check"></span>
+    <span class="icon-clock"></span>
+    <span class="text">hello world</span>
+  </div>
 </template>
 <script>
 import Epub from 'epubjs'
@@ -13,3 +17,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .text {
+    font-family: monospace;
+  }
+</style>
