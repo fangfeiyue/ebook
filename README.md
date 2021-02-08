@@ -120,6 +120,13 @@ export default {
 ```
 npm i node-sass sass-loader -D
 ```
+运行项目如果报`TypeError: this.getOptions is not a function`错误，是因为sass-loader版本过高，可以安装低版本的sass-loader
+```
+# 卸载sass-loader
+npm uninstall -D sass-loader
+# 安装sass-loader
+npm install -D sass-loader@7.x
+```
 ## viewport设置和rem设置
 viewport设置
 ```html
