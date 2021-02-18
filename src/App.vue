@@ -7,13 +7,24 @@
 </template>
 <script>
 import Epub from 'epubjs'
+import { mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapGetters(['count'])
+  },
   mounted () {
     this.book = new Epub('/2014_Book_Self-ReportedPopulationHealthA.epub')
     this.book.renderTo('book', {
       width: window.innerWidth,
       height: window.innerHeight
     }).display()
+
+    setTimeout(() => {
+      // this.$store.commit('increment')
+      // this.$store.dispatch('increment').then(() => console.log(this.$store.state.book.count))
+
+      this.$store.dispatch('increment').then(() => console.log(this.count))
+    }, 3000)
   }
 }
 document.addEventListener('DOMContentLoaded', () => {

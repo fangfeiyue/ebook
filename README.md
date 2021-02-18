@@ -127,6 +127,29 @@ npm uninstall -D sass-loader
 # 安装sass-loader
 npm install -D sass-loader@7.x
 ```
+## 准备web字体
+在 CSS3 之前，web 设计师必须使用已在用户计算机上安装好的字体。
+
+通过 CSS3，web 设计师可以使用他们喜欢的任意字体。
+
+当您找到或购买到希望使用的字体时，可将该字体文件存放到 web 服务器上，它会在需要时被自动下载到用户的计算机上。
+
+您“自己的”的字体是在 CSS3 @font-face 规则中定义的。
+```css
+<style> 
+  @font-face
+  {
+  font-family: myFirstFont;
+  src: url('Sansation_Light.ttf'),
+      url('Sansation_Light.eot'); /* IE9+ */
+  }
+
+  div
+  {
+  font-family:myFirstFont;
+  }
+</style>
+```
 ## viewport设置和rem设置
 viewport设置
 ```html
@@ -141,17 +164,69 @@ document.addEventListener('DOMContentLoaded', () => {
   html.style.fontSize = fontSize + 'px'
 })
 ```
+## vuex+vue-devtool
+Vuex 是专门为 Vue.js 设计的状态管理库，以利用 Vue.js 的细粒度数据响应机制来进行高效的状态更新，这里我们先来简单回顾下Vuex。
+
+store/index.js
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    count: 1
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+      console.log(state.count)
+    }
+  },
+  actions: {
+    increment ({ commit }) {
+      commit('increment')
+    }
+  },
+  modules: {
+  }
+})
+```
+App.vue
+```html
+...
+<script>
+export default {
+  mounted () {
+    setTimeout(() => {
+      // this.$store.commit('increment')
+      this.$store.dispatch('increment')
+    }, 3000)
+  }
+}
+</script>
+...
+```
 
 
 项目难点：
 
-阅读器开发：分页算法、全文搜索算法、引入web字体、主题设计
+阅读器开发：
 
-离线存储机制设计：localstorage+indexedDB
+分页算法，需要给电子书分出页面，难点是因为每个阅读器的屏幕尺寸可能是不一样的，所以分出来的页数也是不一样的
+
+全文搜索算法 在当前书籍中实现全文搜索，并快速定位到搜索的位置
+
+引入web字体
+
+主题设计：主题一旦变化，阅读器的背景、文字颜色等都要发生变化
+
+离线存储机制设计：localstorage+indexedDB对书籍进行缓存实现离线阅读
 
 实现复杂手势和交互动画，如何兼容手势和鼠标操作
 
-利用vuex+minx机制实现组件解耦+复用 
+利用vuex+minx机制实现组件解耦+复用，精简代码量 
 
 利用es6优雅的实现数据结构变化
 
