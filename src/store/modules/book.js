@@ -1,15 +1,15 @@
 const book = {
   state: {
-    count: 1
+    fileName: ''
   },
   mutations: {
-    increment (state) {
-      state.count++
+    setFileName (state, fileName) {
+      state.fileName = fileName
     }
   },
   actions: {
-    increment ({ commit }) {
-      return commit('increment')
+    setFileName ({ commit }, fileName) {
+      return commit('setFileName', fileName)
     }
   }
 }
