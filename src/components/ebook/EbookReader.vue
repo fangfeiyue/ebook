@@ -1,6 +1,5 @@
 <template>
   <div class="ebook-reader">
-    <!-- {{$route.params.fileName}} -->
     <div id="reader"></div>
   </div>
 </template>
@@ -10,10 +9,11 @@ import Epub from 'epubjs'
 global.ePub = Epub
 export default {
   computed: {
-    ...mapGetters(['fileName'])
+    ...mapGetters(['fileName', 'menuVisible'])
   },
   mounted () {
     const fileName = this.$route.params.fileName.split('|').join('/')
+    console.log('fileName', fileName)
     this.$store.dispatch('setFileName', fileName).then(() => this.initEpub())
   },
   methods: {
@@ -24,7 +24,7 @@ export default {
       if (this.reader) this.reader.next()
     },
     toggleTitleAndMenu () {
-      console.log('ddd')
+      this.$store.dispatch('setMenuVisible', !this.menuVisible)
     },
     initEpub () {
       const url = 'http://192.168.0.103:8083/epub/' + this.fileName + '.epub'
