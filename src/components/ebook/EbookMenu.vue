@@ -19,11 +19,9 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { ebookMixin } from '../../mixin/mixin'
 export default {
-  computed: {
-    ...mapGetters(['menuVisible'])
-  }
+  mixins: [ebookMixin]
 }
 </script>
 <style lang="scss" scoped>
