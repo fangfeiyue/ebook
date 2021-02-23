@@ -21,14 +21,14 @@
           <span :style="styleRight" ref="rightText">A</span>
         </div>
       </div>
-      <!-- <div class="setting-font-family" @click.stop="showFontFamilySetting">
+      <div class="setting-font-family" @click.stop="showFontFamilySetting">
         <div class="setting-font-family-text-wrapper">
           <span class="setting-font-family-text">{{defaultFontFamily}}</span>
         </div>
         <div class="setting-font-family-icon-wrapper">
           <span class="icon-forward"></span>
         </div>
-      </div> -->
+      </div>
     </div>
   </transition>
 </template>
@@ -55,6 +55,14 @@ export default {
     }
   },
   methods: {
+    setFontSize (fontSize) {
+      this.setDefaultFontSize(fontSize)
+      this.currentBook.rendition.themes.fontSize(fontSize)
+      console.log(this.currentBook.rendition.themes.fontSize)
+    },
+    showFontFamilySetting () {
+      console.log(111)
+    },
     genStyle () {
       const left = this.$refs.left.getBoundingClientRect().width
       const right = this.$refs.left.getBoundingClientRect().width
@@ -63,11 +71,11 @@ export default {
       const item = this.$refs.item[0].getBoundingClientRect().width
       this.styleLeft = {
         marginLeft: (left + item - leftText) / 2 + 'px',
-        fontSize: this.fontSizeList[0].fontSize + 'px'
+        fontSize: this.fontSizeList[0].fontSize
       }
       this.styleRight = {
         marginRight: (right + item - rightText) / 2 + 'px',
-        fontSize: this.fontSizeList[this.fontSizeList.length - 1].fontSize + 'px'
+        fontSize: this.fontSizeList[this.fontSizeList.length - 1].fontSize
       }
     }
   }
@@ -87,6 +95,7 @@ export default {
     width: 100%;
     height: px2rem(90);
     box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
+    background-color: #fff;
     .setting-font-size {
       flex: 2;
       display: flex;

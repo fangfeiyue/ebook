@@ -1,9 +1,9 @@
 export const FONT_SIZE_LIST = [
-  { fontSize: 12 },
-  { fontSize: 14 },
-  { fontSize: 16 },
-  { fontSize: 18 },
-  { fontSize: 20 },
-  { fontSize: 22 },
-  { fontSize: 24 }
+  { fontSize: '12px' },
+  { fontSize: '14px' },
+  { fontSize: '16px' },
+  { fontSize: '18px' },
+  { fontSize: '20px' },
+  { fontSize: '22px' },
+  { fontSize: '24px' }
 ]

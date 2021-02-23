@@ -62,6 +62,7 @@ export default {
     height: px2rem(48);
     box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
     font-size: px2rem(22);
+    background-color: #fff;
     &.hide-box-shadow {
       box-shadow: none;
     }
