@@ -1,33 +1,58 @@
 <template>
   <div class="ebook-menu">
     <transition name="slide-up">
-      <div class="menu-wrapper" v-show="menuVisible">
-        <div class="icon-wrapper">
-          <span class="icon-menu"></span>
+      <div class="menu-wrapper" :class="{'hide-box-shadow': settingVisible >= 0 || !menuVisible}"
+           v-show="menuVisible">
+        <div class="icon-wrapper" :class="{'selected': settingVisible === 3}">
+          <span class="icon-menu" @click="showSetting(3)"></span>
         </div>
-        <div class="icon-wrapper">
-          <span class="icon-progress"></span>
+        <div class="icon-wrapper" :class="{'selected': settingVisible === 2}">
+          <span class="icon-progress" @click="showSetting(2)"></span>
         </div>
-        <div class="icon-wrapper">
-          <span class="icon-bright"></span>
+        <div class="icon-wrapper" :class="{'selected': settingVisible === 1}">
+          <span class="icon-bright" @click="showSetting(1)"></span>
         </div>
-        <div class="icon-wrapper">
-          <span class="icon-A"></span>
+        <div class="icon-wrapper" :class="{'selected': settingVisible === 0}">
+          <span class="icon-A" @click="showSetting(0)"></span>
         </div>
       </div>
     </transition>
+    <ebook-setting-font></ebook-setting-font>
+    <!-- <ebook-setting-font-popup></ebook-setting-font-popup>
+    <ebook-setting-theme></ebook-setting-theme>
+    <ebook-setting-progress></ebook-setting-progress>
+    <ebook-slide></ebook-slide>
+    <ebook-speaking-icon></ebook-speaking-icon> -->
   </div>
 </template>
 <script>
 import { ebookMixin } from '../../mixin/mixin'
+import EbookSettingFont from './EbookSettingFont'
+// import EbookSettingFontPopup from './EbookSettingFontPopup'
+// import EbookSettingTheme from './EbookSettingTheme'
+// import EbookSettingProgress from './EbookSettingProgress'
+// import EbookSpeakingIcon from './EbookSpeakingIcon'
 export default {
-  mixins: [ebookMixin]
+  mixins: [ebookMixin],
+  components: {
+    // EbookSettingFontPopup,
+    // EbookSlide,
+    // EbookSettingProgress,
+    EbookSettingFont
+    // EbookSettingTheme,
+    // EbookSpeakingIcon
+  },
+  methods: {
+    showSetting (key) {
+      this.setSettingVisible(key)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
   @import "../../assets/styles/global";
 
-  .menu-wrapper {
+.menu-wrapper {
     position: absolute;
     bottom: 0;
     left: 0;

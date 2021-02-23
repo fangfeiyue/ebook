@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
 global.ePub = Epub
@@ -15,12 +14,6 @@ export default {
     this.setFileName(fileName).then(() => this.initEpub())
   },
   methods: {
-    ...mapActions(
-      [
-        'setFileName',
-        'setMenuVisible'
-      ]
-    ),
     prevPage () {
       if (this.reader) this.reader.prev()
       this.hideTileAndMenu()
@@ -30,9 +23,12 @@ export default {
       this.hideTileAndMenu()
     },
     toggleTitleAndMenu () {
+      if (this.menuVisible) this.setSettingVisible(-1)
+
       this.setMenuVisible(!this.menuVisible)
     },
     hideTileAndMenu () {
+      this.setSettingVisible(-1)
       this.setMenuVisible(false)
     },
     initEpub () {
