@@ -24,6 +24,7 @@
 <script type="text/ecmascript-6">
 import { ebookMixin } from '../../mixin/mixin'
 import { FONT_FAMILY } from '../../config/config'
+import { saveFontFamily } from '../../utils/utils'
 
 export default {
   mixins: [ebookMixin],
@@ -41,6 +42,7 @@ export default {
     },
     setFontFamily (font) {
       this.setDefaultFontFamily(font)
+      saveFontFamily(this.fileName, font)
 
       if (font === 'Default') {
         this.currentBook.rendition.themes.font('Tahoma')
