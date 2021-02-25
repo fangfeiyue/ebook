@@ -61,7 +61,7 @@ export default {
       console.log(this.currentBook.rendition.themes.fontSize)
     },
     showFontFamilySetting () {
-      console.log(111)
+      this.setFontFamilyVisible(true)
     },
     genStyle () {
       const left = this.$refs.left.getBoundingClientRect().width

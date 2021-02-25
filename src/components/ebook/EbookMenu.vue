@@ -18,8 +18,8 @@
       </div>
     </transition>
     <ebook-setting-font></ebook-setting-font>
-    <!-- <ebook-setting-font-popup></ebook-setting-font-popup>
-    <ebook-setting-theme></ebook-setting-theme>
+    <ebook-setting-font-popup></ebook-setting-font-popup>
+    <!--<ebook-setting-theme></ebook-setting-theme>
     <ebook-setting-progress></ebook-setting-progress>
     <ebook-slide></ebook-slide>
     <ebook-speaking-icon></ebook-speaking-icon> -->
@@ -28,14 +28,14 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import EbookSettingFont from './EbookSettingFont'
-// import EbookSettingFontPopup from './EbookSettingFontPopup'
+import EbookSettingFontPopup from './EbookSettingFontPopup'
 // import EbookSettingTheme from './EbookSettingTheme'
 // import EbookSettingProgress from './EbookSettingProgress'
 // import EbookSpeakingIcon from './EbookSpeakingIcon'
 export default {
   mixins: [ebookMixin],
   components: {
-    // EbookSettingFontPopup,
+    EbookSettingFontPopup,
     // EbookSlide,
     // EbookSettingProgress,
     EbookSettingFont
