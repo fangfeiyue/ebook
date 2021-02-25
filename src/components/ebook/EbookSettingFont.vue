@@ -58,7 +58,6 @@ export default {
     setFontSize (fontSize) {
       this.setDefaultFontSize(fontSize)
       this.currentBook.rendition.themes.fontSize(fontSize)
-      console.log(this.currentBook.rendition.themes.fontSize)
     },
     showFontFamilySetting () {
       this.setFontFamilyVisible(true)

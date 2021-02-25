@@ -63,6 +63,15 @@ export default {
         // e.preventDefault()
         e.stopPropagation()
       })
+
+      this.reader.hooks.content.register(contents => {
+        Promise.all([
+          contents.addStylesheet('http://192.168.0.103:8083/fonts/cabin.css'),
+          contents.addStylesheet('http://192.168.0.103:8083/fonts/daysOne.css'),
+          contents.addStylesheet('http://192.168.0.103:8083/fonts/montserrat.css'),
+          contents.addStylesheet('http://192.168.0.103:8083/fonts/tangerine.css')
+        ]).then(() => {})
+      })
     }
   }
 }

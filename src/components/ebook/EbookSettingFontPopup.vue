@@ -39,8 +39,14 @@ export default {
     hideFontFamilySetting () {
       this.setFontFamilyVisible(false)
     },
-    setFontFamily (fontFamily) {
-      this.setDefaultFontFamily(fontFamily)
+    setFontFamily (font) {
+      this.setDefaultFontFamily(font)
+
+      if (font === 'Default') {
+        this.currentBook.rendition.themes.font('Tahoma')
+      } else {
+        this.currentBook.rendition.themes.font(font)
+      }
     }
   }
 }
