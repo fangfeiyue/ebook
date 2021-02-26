@@ -6,7 +6,7 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, saveFontFamily, saveFontSize } from '../../utils/utils'
+import { getFontFamily, getFontSize, getTheme, saveFontFamily, saveFontSize, saveTheme } from '../../utils/utils'
 global.ePub = Epub
 export default {
   mixins: [ebookMixin],
@@ -54,6 +54,20 @@ export default {
         this.setDefaultFontFamily(fontFamily)
       }
     },
+    initTheme () {
+      let theme = getTheme(this.fileName)
+      console.log('themme', theme)
+      if (!theme) {
+        theme = this.themeList[0].name
+        saveTheme(this.fileName, theme)
+      }
+      this.themeList.forEach(theme => this.reader.themes.register(theme.name, theme.style))
+
+      this.setDefaultTheme(theme)
+      this.reader.themes.select(theme)
+
+      return theme
+    },
     initEpub () {
       const url = 'http://192.168.0.103:8083/epub/' + this.fileName + '.epub'
       this.book = new Epub(url)
@@ -66,6 +80,7 @@ export default {
       })
 
       this.reader.display().then(() => {
+        this.initTheme()
         this.initFontSize()
         this.initFontFamily()
       })
