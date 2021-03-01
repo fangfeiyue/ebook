@@ -69,23 +69,7 @@ export default {
 
       return theme
     },
-    initEpub () {
-      const url = 'http://192.168.0.103:8083/epub/' + this.fileName + '.epub'
-      this.book = new Epub(url)
-
-      this.setCurrentBook(this.book)
-
-      this.reader = this.book.renderTo('reader', {
-        width: innerWidth,
-        height: innerHeight
-      })
-
-      this.reader.display().then(() => {
-        this.initTheme()
-        this.initFontSize()
-        this.initFontFamily()
-      })
-
+    initGestrue () {
       this.reader.on('touchstart', e => {
         this.touchStartX = e.changedTouches[0].clientX
         this.timeStamp = e.timeStamp
@@ -102,7 +86,20 @@ export default {
         // e.preventDefault()
         e.stopPropagation()
       })
+    },
+    initRender () {
+      this.reader = this.book.renderTo('reader', {
+        width: innerWidth,
+        height: innerHeight
+      })
 
+      this.reader.display().then(() => {
+        this.initTheme()
+        this.initFontSize()
+        this.initFontFamily()
+      })
+    },
+    registerFont () {
       this.reader.hooks.content.register(contents => {
         Promise.all([
           contents.addStylesheet(`${process.env.VUE_APP_BASE_URL}/fonts/cabin.css`),
@@ -111,6 +108,23 @@ export default {
           contents.addStylesheet(`${process.env.VUE_APP_BASE_URL}/fonts/tangerine.css`)
         ]).then(() => {})
       })
+    },
+    initPaging () {
+      this.book.ready.then(() => {
+        return this.book.locations.generate(750 * (window.innerWidth / 375) * (getFontSize(this.fileName) / 16))
+      }).then(locations => {
+        // console.log(locations)
+        this.setBookAvailable(true)
+      })
+    },
+    initEpub () {
+      const url = process.env.VUE_APP_BASE_URL + '/epub/' + this.fileName + '.epub'
+      this.book = new Epub(url)
+      this.setCurrentBook(this.book)
+      this.initRender()
+      this.initGestrue()
+      this.registerFont()
+      this.initPaging()
     }
   }
 }
