@@ -51,3 +51,31 @@ export function getTheme (fileName) {
 export function saveTheme (fileName, theme) {
   setBookObj(fileName, 'theme', theme)
 }
+
+export function addCssFile (href) {
+  const link = document.createElement('link')
+  link.setAttribute('rel', 'stylesheet')
+  link.setAttribute('type', 'text/css')
+  link.setAttribute('href', href)
+  document.getElementsByTagName('head')[0].appendChild(link)
+}
+
+export function removeCssFile (href) {
+  const link = document.getElementsByTagName('link')
+
+  for (var i = link.length; i >= 0; i--) {
+    if (link[i] && link[i].getAttribute('href') && link[i].getAttribute('href').indexOf(href) !== -1) {
+      link[i].parentNode.removeChild(link[i])
+    }
+  }
+}
+
+export function clearPreTheme (href) {
+  const cssArr = [
+    'theme_eye.css',
+    'theme_gold.css',
+    'theme_night.css',
+    'theme_default.css'
+  ]
+  cssArr.forEach(removeCssFile)
+}

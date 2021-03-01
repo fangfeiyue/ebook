@@ -1,5 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { themeList } from '../config/config'
+import { addCssFile, clearPreTheme } from '../utils/utils'
 
 export const ebookMixin = {
   computed: {
@@ -51,6 +52,26 @@ export const ebookMixin = {
       'setOffsetY',
       'setIsBookmark',
       'setSpeakingIconBottom'
-    ])
+    ]),
+    getCss () {
+      switch (this.defaultTheme) {
+        case 'Default':
+          return 'theme_default.css'
+        case 'Gold':
+          return 'theme_gold.css'
+        case 'Eye':
+          return 'theme_eye.css'
+        case 'Night':
+          return 'theme_night.css'
+        default:
+          return 'theme_default.css'
+      }
+    },
+    setGlobalTheme () {
+      // 清除之前的主题
+      clearPreTheme()
+      const baseUrl = `${process.env.VUE_APP_BASE_URL}/theme/`
+      addCssFile(baseUrl + this.getCss())
+    }
   }
 }

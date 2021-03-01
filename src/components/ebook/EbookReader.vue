@@ -64,6 +64,7 @@ export default {
       this.themeList.forEach(theme => this.reader.themes.register(theme.name, theme.style))
 
       this.setDefaultTheme(theme)
+      this.setGlobalTheme()
       this.reader.themes.select(theme)
 
       return theme
