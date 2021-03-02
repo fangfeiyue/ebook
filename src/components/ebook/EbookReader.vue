@@ -6,7 +6,7 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, getTheme, saveFontFamily, saveFontSize, saveTheme } from '../../utils/utils'
+import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme } from '../../utils/utils'
 global.ePub = Epub
 export default {
   mixins: [ebookMixin],
@@ -16,11 +16,11 @@ export default {
   },
   methods: {
     prevPage () {
-      if (this.reader) this.reader.prev()
+      if (this.reader) this.reader.prev().then(this.refreshContent)
       this.hideTileAndMenu()
     },
     nextPage () {
-      if (this.reader) this.reader.next()
+      if (this.reader) this.reader.next().then(this.refreshContent)
       this.hideTileAndMenu()
     },
     toggleTitleAndMenu () {
@@ -92,11 +92,12 @@ export default {
         width: innerWidth,
         height: innerHeight
       })
-
-      this.reader.display().then(() => {
+      const location = getLocation(this.fileName)
+      this.displayBook(location, () => {
         this.initTheme()
         this.initFontSize()
         this.initFontFamily()
+        this.refreshContent()
       })
     },
     registerFont () {
@@ -115,6 +116,8 @@ export default {
       }).then(locations => {
         // console.log(locations)
         this.setBookAvailable(true)
+        // 分页完成后
+        this.refreshContent()
       })
     },
     initEpub () {

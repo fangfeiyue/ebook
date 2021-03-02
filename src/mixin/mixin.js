@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { themeList } from '../config/config'
-import { addCssFile, clearPreTheme } from '../utils/utils'
+import { addCssFile, clearPreTheme, saveLocation } from '../utils/utils'
 
 export const ebookMixin = {
   computed: {
@@ -72,6 +72,24 @@ export const ebookMixin = {
       clearPreTheme()
       const baseUrl = `${process.env.VUE_APP_BASE_URL}/theme/`
       addCssFile(baseUrl + this.getCss())
+    },
+    refreshContent (d) {
+      const curLocation = this.currentBook.rendition.currentLocation()
+      console.log(curLocation)
+      const cfi = (curLocation.start && curLocation.start.cfi) || ''
+      if (!cfi) return
+      const progress = this.currentBook.locations.percentageFromCfi(cfi)
+      this.setProgress(Math.floor(progress * 100))
+      this.setSection(curLocation.start.index)
+      saveLocation(this.fileName, cfi)
+    },
+    displayBook (target, cb) {
+      const reader = this.currentBook.rendition
+      reader.display(target).then(() => {
+        cb && cb()
+        this.refreshContent()
+      })
+      return target
     }
   }
 }

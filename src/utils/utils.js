@@ -79,3 +79,11 @@ export function clearPreTheme (href) {
   ]
   cssArr.forEach(removeCssFile)
 }
+
+export function saveLocation (fileName, location) {
+  setBookObj(fileName, 'location', location)
+}
+
+export function getLocation (fileName) {
+  return getBookObj(fileName, 'location')
+}

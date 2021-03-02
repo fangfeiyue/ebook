@@ -69,7 +69,7 @@ export default {
     },
     displayProgress () {
       const c = this.currentBook.locations.cfiFromPercentage(this.progress / 100)
-      this.currentBook.rendition.display(c)
+      this.displayBook(c)
     },
     updateProgressBg () {
       this.$refs.progress.style.backgroundSize = `${this.progress}% 100%`
@@ -88,14 +88,7 @@ export default {
     },
     displaySection () {
       const sectionInfo = this.currentBook.section(this.section)
-      if (sectionInfo && sectionInfo.href) this.currentBook.rendition.display(sectionInfo.href).then(this.refreshContent)
-    },
-    refreshContent () {
-      const curLocation = this.currentBook.rendition.currentLocation()
-      const cfi = (curLocation.start && curLocation.start.cfi) || ''
-      if (!cfi) return
-      const progress = this.currentBook.locations.percentageFromCfi(cfi)
-      this.setProgress(Math.floor(progress * 100))
+      if (sectionInfo && sectionInfo.href) this.displayBook(sectionInfo.href)
     }
   }
 }
