@@ -42,8 +42,28 @@ export default {
     }
   },
   methods: {
-    onProgressInput (progress) {},
-    onProgressChange (progress) {},
+    onProgressInput (progress) {
+      this.setProgress(progress).then(() => {
+        this.updateProgressBg()
+        this.displayProgress()
+      })
+    },
+    onProgressChange (progress) {
+      this.setProgress(progress).then(() => {
+        this.updateProgressBg()
+        this.displayProgress()
+      })
+    },
+    displayProgress () {
+      const c = this.currentBook.locations.cfiFromPercentage(this.progress / 100)
+      this.currentBook.rendition.display(c)
+    },
+    updateProgressBg () {
+      this.$refs.progress.style.backgroundSize = `${this.progress}% 100%`
+    },
+    updated () {
+      this.updateProgressBg()
+    },
     getReadTime () {},
     prevSection () {}
   }
@@ -85,8 +105,6 @@ export default {
           width: 100%;
           -webkit-appearance: none;
           height: px2rem(2);
-          background: -webkit-linear-gradient(#5d6268, #5d6268) no-repeat, #b4b5b7;
-          background-size: 0 100%;
           margin: 0 px2rem(10);
           &:focus {
             outline: none;
