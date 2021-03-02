@@ -7,8 +7,9 @@
           <span class="icon-forward"></span>
         </div>
         <div class="progress-wrapper">
-          <div class="progress-icon-wrapper">
+          <div class="progress-icon-wrapper" @click="prevSection()">
             <span class="icon-back" @click="prevSection()"></span>
+            <!-- 上一章 -->
           </div>
           <input class="progress" type="range"
                  max="100"
@@ -21,10 +22,11 @@
                  ref="progress">
           <div class="progress-icon-wrapper" @click="nextSection()">
             <span class="icon-forward"></span>
+            <!-- 下一章 -->
           </div>
         </div>
         <div class="text-wrapper">
-          <span class="progress-section-text">{{getSectionName}}</span>
+          <span class="progress-section-text">{{sectionName}}</span>
           <span class="progress-text">({{bookAvailable ? progress + '%' : $t('book.loading')}})</span>
         </div>
       </div>
@@ -39,6 +41,17 @@ export default {
   data () {
     return {
       getSectionName: 1
+    }
+  },
+  computed: {
+    sectionName () {
+      if (this.section) {
+        const section = this.currentBook.section(this.section)
+        console.log('dfasd', this.currentBook.navigation.get(section.href))
+        if (section && section.href) return this.currentBook.navigation.get(section.href).label
+        return '未知章节'
+      }
+      return '未知章节'
     }
   },
   methods: {
@@ -75,7 +88,14 @@ export default {
     },
     displaySection () {
       const sectionInfo = this.currentBook.section(this.section)
-      if (sectionInfo && sectionInfo.href) this.currentBook.rendition.display(sectionInfo.href)
+      if (sectionInfo && sectionInfo.href) this.currentBook.rendition.display(sectionInfo.href).then(this.refreshContent)
+    },
+    refreshContent () {
+      const curLocation = this.currentBook.rendition.currentLocation()
+      const cfi = (curLocation.start && curLocation.start.cfi) || ''
+      if (!cfi) return
+      const progress = this.currentBook.locations.percentageFromCfi(cfi)
+      this.setProgress(Math.floor(progress * 100))
     }
   }
 }
