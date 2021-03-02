@@ -65,7 +65,18 @@ export default {
       this.updateProgressBg()
     },
     getReadTime () {},
-    prevSection () {}
+    prevSection () {
+      if (this.section > 0 && this.bookAvailable) {
+        this.setSection(this.section - 1).then(this.displaySection).catch(err => console.log(err))
+      }
+    },
+    nextSection () {
+      if (this.section < this.currentBook.spine.length - 1 && this.bookAvailable) this.setSection(this.section + 1).then(this.displaySection)
+    },
+    displaySection () {
+      const sectionInfo = this.currentBook.section(this.section)
+      if (sectionInfo && sectionInfo.href) this.currentBook.rendition.display(sectionInfo.href)
+    }
   }
 }
 </script>
