@@ -3,7 +3,7 @@
     <div class="setting-wrapper" v-show="menuVisible && settingVisible === 2">
       <div class="setting-progress">
         <div class="read-time-wrapper">
-          <span class="read-time-text">{{getReadTime()}}</span>
+          <span class="read-time-text">您已阅读{{readingTime}}</span>
           <span class="icon-forward"></span>
         </div>
         <div class="progress-wrapper">
@@ -36,10 +36,12 @@
 
 <script>
 import { ebookMixin } from '../../mixin/mixin'
+import { getReadTime } from '../../utils/utils'
 export default {
   mixins: [ebookMixin],
   data () {
     return {
+      readingTime: 0,
       getSectionName: 1
     }
   },
@@ -52,6 +54,11 @@ export default {
         return '未知章节'
       }
       return '未知章节'
+    }
+  },
+  watch: {
+    settingVisible () {
+      this.readingTime = this.getReadTime()
     }
   },
   methods: {
@@ -77,7 +84,6 @@ export default {
     updated () {
       this.updateProgressBg()
     },
-    getReadTime () {},
     prevSection () {
       if (this.section > 0 && this.bookAvailable) {
         this.setSection(this.section - 1).then(this.displaySection).catch(err => console.log(err))
@@ -89,6 +95,14 @@ export default {
     displaySection () {
       const sectionInfo = this.currentBook.section(this.section)
       if (sectionInfo && sectionInfo.href) this.displayBook(sectionInfo.href)
+    },
+    getReadTime () {
+      const time = getReadTime(this.fileName)
+      return time ? this.formatTime(Math.ceil(time / 60)) : 0
+    },
+    formatTime (time) {
+      if (time < 60) return time + '分钟'
+      return Math.ceil(time / 60) + '小时'
     }
   }
 }
