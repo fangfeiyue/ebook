@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { themeList } from '../config/config'
-import { addCssFile, clearPreTheme, saveLocation } from '../utils/utils'
+import { addCssFile, clearPreTheme, saveLocation, getReadTime } from '../utils/utils'
 
 export const ebookMixin = {
   computed: {
@@ -90,6 +90,19 @@ export const ebookMixin = {
         this.refreshContent()
       })
       return target
+    },
+    hide () {
+      this.setSettingVisible(-1)
+      this.setMenuVisible(false)
+      this.setFontFamilyVisible(false)
+    },
+    getReadTime () {
+      const time = getReadTime(this.fileName)
+      return time ? this.formatTime(Math.ceil(time / 60)) : 0
+    },
+    formatTime (time) {
+      if (time < 60) return time + '分钟'
+      return Math.ceil(time / 60) + '小时'
     }
   }
 }

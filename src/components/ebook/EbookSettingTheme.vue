@@ -25,8 +25,8 @@ export default {
     setTheme (index) {
       const theme = this.themeList[index]
       this.setDefaultTheme(theme.name).then(() => {
-        this.currentBook.rendition.themes.select(theme.name)
         this.setGlobalTheme()
+        this.currentBook.rendition.themes.select(theme.name)
       })
       saveTheme(this.fileName, theme.name)
     }
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss" scoped>
   @import "../../assets/styles/global";
 
   .setting-wrapper {

@@ -21,8 +21,8 @@
     <ebook-setting-font-popup></ebook-setting-font-popup>
     <ebook-setting-theme></ebook-setting-theme>
     <ebook-setting-progress></ebook-setting-progress>
-    <!-- <ebook-slide></ebook-slide>
-    <ebook-speaking-icon></ebook-speaking-icon> -->
+    <ebook-slide></ebook-slide>
+    <!--<ebook-speaking-icon></ebook-speaking-icon> -->
   </div>
 </template>
 <script>
@@ -31,12 +31,13 @@ import EbookSettingFont from './EbookSettingFont'
 import EbookSettingFontPopup from './EbookSettingFontPopup'
 import EbookSettingTheme from './EbookSettingTheme'
 import EbookSettingProgress from './EbookSettingProgress'
+import EbookSlide from './EbookSlide'
 // import EbookSpeakingIcon from './EbookSpeakingIcon'
 export default {
   mixins: [ebookMixin],
   components: {
     EbookSettingFontPopup,
-    // EbookSlide,
+    EbookSlide,
     EbookSettingProgress,
     EbookSettingFont,
     EbookSettingTheme

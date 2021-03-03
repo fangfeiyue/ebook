@@ -17,11 +17,11 @@ export default {
   methods: {
     prevPage () {
       if (this.reader) this.reader.prev().then(this.refreshContent)
-      this.hideTileAndMenu()
+      this.hide()
     },
     nextPage () {
       if (this.reader) this.reader.next().then(this.refreshContent)
-      this.hideTileAndMenu()
+      this.hide()
     },
     toggleTitleAndMenu () {
       if (this.menuVisible) {
@@ -30,11 +30,6 @@ export default {
       }
 
       this.setMenuVisible(!this.menuVisible)
-    },
-    hideTileAndMenu () {
-      this.setSettingVisible(-1)
-      this.setMenuVisible(false)
-      this.setFontFamilyVisible(false)
     },
     initFontSize () {
       const fontSize = getFontSize(this.fileName)
