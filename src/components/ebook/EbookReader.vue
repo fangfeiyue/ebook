@@ -6,7 +6,7 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme } from '../../utils/utils'
+import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme, saveMetadata } from '../../utils/utils'
 global.ePub = Epub
 export default {
   mixins: [ebookMixin],
@@ -82,6 +82,15 @@ export default {
         e.stopPropagation()
       })
     },
+    parseBook () {
+      const book = this.book
+      book.loaded.metadata.then(metadata => {
+        this.setMetadata(metadata)
+        saveMetadata(this.fileName, metadata)
+      })
+
+      book.loaded.cover.then(cover => book.archive.createUrl(cover).then(url => this.setCover(url)))
+    },
     initRender () {
       this.reader = this.book.renderTo('reader', {
         width: innerWidth,
@@ -93,6 +102,7 @@ export default {
         this.initFontSize()
         this.initFontFamily()
         this.refreshContent()
+        this.parseBook()
       })
     },
     registerFont () {

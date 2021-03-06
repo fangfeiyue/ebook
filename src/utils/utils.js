@@ -95,3 +95,11 @@ export function getReadTime (fileName) {
 export function saveReadTime (fileName, time) {
   setBookObj(fileName, 'readTime', time)
 }
+
+export function saveMetadata (fileName, metadata) {
+  setBookObj(fileName, 'metadata', metadata)
+}
+
+export function getMetadata (fileName) {
+  return getBookObj(fileName, 'metadata')
+}

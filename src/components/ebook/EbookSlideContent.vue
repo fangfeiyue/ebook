@@ -19,7 +19,7 @@
     </div>
     <div class="slide-contents-book-wrapper" v-show="!searchVisible">
       <div class="slide-contents-book-img-wrapper">
-        <img v-lazy="cover" class="slide-contents-book-img">
+        <img :src="cover" class="slide-contents-book-img">
       </div>
       <div class="slide-contents-book-info-wrapper">
         <div class="slide-contents-book-title">
@@ -45,10 +45,11 @@ export default {
   data () {
     return {
       searchVisible: false,
-      metadata: {
-        title: 'hello',
-        creator: 'fang'
-      }
+      searchText: false
+      // metadata: {
+      //   title: 'hello',
+      //   creator: 'fang'
+      // }
     }
   },
   mixins: [ebookMixin],
