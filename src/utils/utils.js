@@ -103,3 +103,11 @@ export function saveMetadata (fileName, metadata) {
 export function getMetadata (fileName) {
   return getBookObj(fileName, 'metadata')
 }
+
+export function flatten (arr) {
+  return [].concat(...arr.map(item => [item, ...flatten(item.subitems)]))
+}
+
+export function addLevel (nav, item, level = 0) {
+  return !item.parent ? level : addLevel(nav.filter(p => p.id === item.parent)[0], ++level)
+}

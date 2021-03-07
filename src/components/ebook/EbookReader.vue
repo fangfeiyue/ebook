@@ -6,7 +6,7 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme, saveMetadata } from '../../utils/utils'
+import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme, saveMetadata, flatten, addLevel } from '../../utils/utils'
 global.ePub = Epub
 export default {
   mixins: [ebookMixin],
@@ -87,6 +87,13 @@ export default {
       book.loaded.metadata.then(metadata => {
         this.setMetadata(metadata)
         saveMetadata(this.fileName, metadata)
+      })
+
+      book.loaded.navigation.then(navigation => {
+        const nav = flatten(navigation.toc)
+        nav.forEach(item => (item.level = addLevel(nav, item)))
+        this.setNavigation(nav)
+        console.log('nav', nav)
       })
 
       book.loaded.cover.then(cover => book.archive.createUrl(cover).then(url => this.setCover(url)))
