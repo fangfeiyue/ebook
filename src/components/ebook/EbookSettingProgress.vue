@@ -46,13 +46,7 @@ export default {
   },
   computed: {
     sectionName () {
-      if (this.section) {
-        const section = this.currentBook.section(this.section)
-        console.log('dfasd', this.currentBook.navigation.get(section.href))
-        if (section && section.href && this.currentBook && this.currentBook.navigation) return this.currentBook.navigation.get(section.href).label
-        return '未知章节'
-      }
-      return '未知章节'
+      return this.section && this.navigation ? this.navigation[this.section].label : '未知章节'
     }
   },
   watch: {

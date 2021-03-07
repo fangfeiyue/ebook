@@ -6,7 +6,7 @@
 <script>
 import { ebookMixin } from '../../mixin/mixin'
 import Epub from 'epubjs'
-import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme, saveMetadata, flatten, addLevel } from '../../utils/utils'
+import { getFontFamily, getFontSize, getLocation, getTheme, saveFontFamily, saveFontSize, saveTheme, saveMetadata, flatten } from '../../utils/utils'
 global.ePub = Epub
 export default {
   mixins: [ebookMixin],
@@ -91,7 +91,17 @@ export default {
 
       book.loaded.navigation.then(navigation => {
         const nav = flatten(navigation.toc)
-        nav.forEach(item => (item.level = addLevel(nav, item)))
+        // nav.forEach(item => (item.level = addLevel(nav, item)))
+
+        function find (item, v = 0) {
+          const parent = nav.filter(it => it.id === item.parent)[0]
+          return !item.parent ? v : (parent ? find(parent, ++v) : v)
+        }
+
+        nav.forEach(item => {
+          item.level = find(item)
+        })
+
         this.setNavigation(nav)
         console.log('nav', nav)
       })

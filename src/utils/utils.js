@@ -111,3 +111,8 @@ export function flatten (arr) {
 export function addLevel (nav, item, level = 0) {
   return !item.parent ? level : addLevel(nav.filter(p => p.id === item.parent)[0], ++level)
 }
+
+export function px2rem (px) {
+  const ratio = 375 / 10
+  return px / ratio
+}

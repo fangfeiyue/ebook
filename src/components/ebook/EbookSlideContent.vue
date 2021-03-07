@@ -37,28 +37,43 @@
         <div class="slide-contents-book-time">已读{{getReadTime()}}</div>
       </div>
     </div>
+    <scroll class="slide-contents-list" :top="156" :bottom="48" ref="scroll" v-show="!searchVisible">
+      <div class="slide-contents-item" v-for="(item, index) in navigation" :key="index" @click="jumpDirectory(item.href)">
+        <span class="slide-contents-item-label" :style="contentItemStyle(item)" :class="{'selected': section === index}">{{item.label.trim()}}</span>
+        <span class="slide-contents-item-page">{{item.page}}</span>
+      </div>
+    </scroll>
   </div>
 </template>
 <script>
 import { ebookMixin } from '../../mixin/mixin'
+import { px2rem } from '../../utils/utils'
+import Scroll from '../common/Scroll'
 export default {
   data () {
     return {
       searchVisible: false,
       searchText: false
-      // metadata: {
-      //   title: 'hello',
-      //   creator: 'fang'
-      // }
     }
+  },
+  components: {
+    Scroll
   },
   mixins: [ebookMixin],
   methods: {
+    jumpDirectory (href) {
+      this.displayBook(href, () => this.hide())
+    },
     showSearchPage () {
       this.searchVisible = true
     },
     hideSearchPage () {
       this.searchVisible = false
+    },
+    contentItemStyle (item) {
+      return {
+        marginLeft: `${px2rem(item.level * 15)}rem`
+      }
     }
   }
 }
