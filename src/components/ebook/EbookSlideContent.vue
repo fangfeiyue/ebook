@@ -83,7 +83,7 @@ export default {
         marginLeft: `${px2rem(item.level * 15)}rem`
       }
     },
-    highlightedSearchContent (list) {
+    highlightedSearchRes (list) {
       this.searchList = list
       this.searchList.map(item => {
         item.excerpt = item.excerpt.replace(this.searchText, `<span class="content-search-text">${this.searchText}</span>`)
@@ -93,10 +93,14 @@ export default {
     search () {
       const searchText = this.searchText.trim()
       if (!searchText) return
-      this.doSearch(searchText).then(this.highlightedSearchContent)
+      this.doSearch(searchText).then(this.highlightedSearchRes)
     },
     jumpToContent (target) {
       this.displayBook(target, this.hide)
+      this.highlightedSearchContent(target)
+    },
+    highlightedSearchContent (target) {
+      this.currentBook.rendition.annotations.highlight(target)
     },
     doSearch (q) {
       return Promise.all(
