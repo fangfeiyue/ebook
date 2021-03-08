@@ -10,7 +10,7 @@
                placeholder="搜索书籍内容"
                @click="showSearchPage()"
                v-model="searchText"
-               @keyup.enter="search()"
+               @keyup.enter.exact="search()"
                ref="searchInput">
       </div>
       <div class="slide-contents-search-cancel" v-if="searchVisible"
@@ -43,6 +43,11 @@
         <span class="slide-contents-item-page">{{item.page}}</span>
       </div>
     </scroll>
+    <scroll class="slide-search-list" :top="66" :bottom="48" ref="scroll" v-show="searchVisible">
+      <div class="slide-search-item" v-for="(item, index) in searchList"
+           :key="index" v-html="item.excerpt" @click="display(item.cfi, true)">
+      </div>
+    </scroll>
   </div>
 </template>
 <script>
@@ -53,7 +58,8 @@ export default {
   data () {
     return {
       searchVisible: false,
-      searchText: false
+      searchText: '',
+      searchList: null
     }
   },
   components: {
@@ -69,11 +75,24 @@ export default {
     },
     hideSearchPage () {
       this.searchVisible = false
+      this.searchText = ''
+      this.searchList = null
     },
     contentItemStyle (item) {
       return {
         marginLeft: `${px2rem(item.level * 15)}rem`
       }
+    },
+    search () {
+      const searchText = this.searchText.trim()
+      if (!searchText) return
+      this.doSearch(searchText).then(list => (this.searchList = list))
+    },
+    doSearch (q) {
+      return Promise.all(
+        this.currentBook.spine.spineItems.map(
+          item => item.load(this.currentBook.load.bind(this.currentBook)).then(item.find.bind(item, q)).finally(item.unload.bind(item)))
+      ).then(results => Promise.resolve([].concat.apply([], results)))
     }
   }
 }
