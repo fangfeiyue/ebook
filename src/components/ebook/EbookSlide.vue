@@ -3,7 +3,7 @@
     <div class="slide-content-wrapper" v-show="settingVisible === 3 || settingVisible === 4">
       <transition name="slide-right">
         <div class="content" v-if="settingVisible === 3 || settingVisible === 4">
-          <div class="content-page-wrapper" v-if="1">
+          <div class="content-page-wrapper" v-if="bookAvailable">
             <div class="content-page">
               <keep-alive>
                 <component :is="tab === 1 ? content : bookmark"></component>
@@ -31,16 +31,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-// import EbookLoading from './EbookLoading'
+import EbookLoading from './EbookLoading'
 import EbookContent from './EbookSlideContent'
 // import EbookBookmark from './EbookSlideBookmark'
 import { ebookMixin } from '../../mixin/mixin'
 
 export default {
   mixins: [ebookMixin],
-  // components: {
-  //   EbookLoading
-  // },
+  components: {
+    EbookLoading
+  },
   data () {
     return {
       tab: 1,
