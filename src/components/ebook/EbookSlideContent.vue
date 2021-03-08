@@ -45,7 +45,7 @@
     </scroll>
     <scroll class="slide-search-list" :top="66" :bottom="48" ref="scroll" v-show="searchVisible">
       <div class="slide-search-item" v-for="(item, index) in searchList"
-           :key="index" v-html="item.excerpt" @click="display(item.cfi, true)">
+           :key="index" v-html="item.excerpt" @click="jumpToContent(item.cfi)">
       </div>
     </scroll>
   </div>
@@ -83,10 +83,20 @@ export default {
         marginLeft: `${px2rem(item.level * 15)}rem`
       }
     },
+    highlightedSearchContent (list) {
+      this.searchList = list
+      this.searchList.map(item => {
+        item.excerpt = item.excerpt.replace(this.searchText, `<span class="content-search-text">${this.searchText}</span>`)
+        return item
+      })
+    },
     search () {
       const searchText = this.searchText.trim()
       if (!searchText) return
-      this.doSearch(searchText).then(list => (this.searchList = list))
+      this.doSearch(searchText).then(this.highlightedSearchContent)
+    },
+    jumpToContent (target) {
+      this.displayBook(target, this.hide)
     },
     doSearch (q) {
       return Promise.all(
