@@ -26,13 +26,20 @@ export default {
   },
   watch: {
     offsetY (v) {
-      if (v > 0) this.move(v)
+      if (v > 0) {
+        this.move(v)
+      } else if (v === 0) {
+        this.restore()
+      }
     }
   },
   methods: {
     move (v) {
       console.log('ddd', v)
       this.$refs.reader.style.top = v + 'px'
+    },
+    restore () {
+      this.$refs.reader.style.top = '0px'
     },
     calReadTime () {
       let time = getReadTime(this.fileName)
