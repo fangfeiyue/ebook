@@ -104,6 +104,13 @@ export function getMetadata (fileName) {
   return getBookObj(fileName, 'metadata')
 }
 
+export function saveBookmark (fileName, location) {
+  setBookObj(fileName, 'bookmark', location)
+}
+export function getBookmark (fileName) {
+  return getBookObj(fileName, 'bookmark')
+}
+
 export function flatten (arr) {
   return [].concat(...arr.map(item => [item, ...flatten(item.subitems)]))
 }
