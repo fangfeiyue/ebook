@@ -40,6 +40,10 @@ export default {
     },
     restore () {
       this.$refs.reader.style.top = '0px'
+      this.$refs.reader.style.transition = 'all .2s linear'
+      setTimeout(() => {
+        this.$refs.reader.style.transition = ''
+      }, 200)
     },
     calReadTime () {
       let time = getReadTime(this.fileName)
