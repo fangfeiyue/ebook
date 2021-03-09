@@ -171,6 +171,8 @@ export default {
       }
     },
     move (e) {
+      if (this.menuVisible || !this.bookAvailable) return
+
       this.firstOffsetY ? this.setOffsetY(e.changedTouches[0].clientY - this.firstOffsetY) : this.firstOffsetY = e.changedTouches[0].clientY
       e.preventDefault()
       e.stopPropagation()
