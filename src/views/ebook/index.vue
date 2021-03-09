@@ -1,5 +1,5 @@
 <template>
-  <div class="ebook">
+  <div class="ebook" ref="reader">
     <ebook-title></ebook-title>
     <ebook-reader></ebook-reader>
     <ebook-menu></ebook-menu>
@@ -24,7 +24,16 @@ export default {
   beforeMount () {
     this.timer && clearInterval(this.timer)
   },
+  watch: {
+    offsetY (v) {
+      if (v > 0) this.move(v)
+    }
+  },
   methods: {
+    move (v) {
+      console.log('ddd', v)
+      this.$refs.reader.style.top = v + 'px'
+    },
     calReadTime () {
       let time = getReadTime(this.fileName)
       if (!time) time = 0
@@ -40,4 +49,13 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import "../../assets/styles/global.scss";
+  .ebook {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

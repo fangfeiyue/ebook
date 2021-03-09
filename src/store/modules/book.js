@@ -74,7 +74,7 @@ const book = {
     setPagelist (state, pagelist) {
       state.pagelist = pagelist
     },
-    setOffsety (state, offsetY) {
+    setOffsetY (state, offsetY) {
       state.offsetY = offsetY
     },
     setIsBookmark (state, isBookmark) {

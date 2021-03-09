@@ -50,8 +50,8 @@ const actions = {
   setPagelist ({ commit }, pagelist) {
     return commit('setPagelist', pagelist)
   },
-  setOffsety ({ commit }, offsetY) {
-    return commit('setOffsety', offsetY)
+  setOffsetY ({ commit }, offsetY) {
+    return commit('setOffsetY', offsetY)
   },
   setIsBookmark ({ commit }, isBookmark) {
     return commit('setIsBookmark', isBookmark)

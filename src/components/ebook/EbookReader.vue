@@ -1,5 +1,13 @@
 <template>
   <div class="ebook-reader">
+    <div class="ebook-reader-mask"
+      @touchmove="move"
+      @touchend="moveEnd"
+      @mousedown.left="onMouseEnter"
+      @mousemove.left="onMouseMove"
+      @mouseup.left="onMouseEnd"
+      @click="onMaskClick">
+    </div>
     <div id="reader"></div>
   </div>
 </template>
@@ -150,7 +158,44 @@ export default {
       this.initGestrue()
       this.registerFont()
       this.initPaging()
+    },
+    onMaskClick (e) {
+      const offsetX = e.offsetX
+      const width = window.innerWidth
+      if (offsetX > 0 && offsetX < width * 0.3) {
+        this.prevPage()
+      } else if (offsetX > 0 && offsetX > width * 0.7) {
+        this.nextPage()
+      } else {
+        this.toggleTitleAndMenu()
+      }
+    },
+    move (e) {
+      this.firstOffsetY ? this.setOffsetY(e.changedTouches[0].clientY - this.firstOffsetY) : this.firstOffsetY = e.changedTouches[0].clientY
+      e.preventDefault()
+      e.stopPropagation()
+    },
+    moveEnd () {
+      this.setOffsetY(0)
+      this.firstOffsetY = null
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import "../../assets/styles/global.scss";
+  .ebook-reader {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .ebook-reader-mask {
+      position: absolute;
+      z-index: 150;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+</style>
