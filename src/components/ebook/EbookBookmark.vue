@@ -8,10 +8,7 @@
         {{text}}
       </div>
     </div>
-    <!-- <div class="ebook-bookmark-icon-wrapper" :style="fixed && !isPaginating ? fixedStyle : {}">
-      <book-mark :width="15" :height="35" :color="color" ref="bookmark"></book-mark>
-    </div> -->
-    <div class="ebook-bookmark-icon-wrapper">
+    <div class="ebook-bookmark-icon-wrapper" :style="isFixed ? fixedStyle : {}">
       <book-mark :width="15" :height="35" :color="color" ref="bookmark"></book-mark>
     </div>
   </div>
@@ -71,7 +68,7 @@ export default {
       color: WHITE,
       text: '',
       setBookmark: false,
-      fixed: false
+      isFixed: false
     }
   },
   methods: {
@@ -80,6 +77,12 @@ export default {
         this.$refs.ebookBookmark.style.top = `${-this.height}px`
         this.$refs.iconDown.style.transform = 'rotate(0deg)'
       }, 200)
+
+      if (this.isFixed) {
+        this.setIsBookmark(true)
+      } else {
+        this.setIsBookmark(false)
+      }
     },
     beforeHight () {
       if (this.isBookmark) {
@@ -89,6 +92,7 @@ export default {
         this.text = '下拉添加书签'
         this.color = WHITE
       }
+      this.isFixed = false
     },
     beforeThreshold (v) {
       this.$refs.ebookBookmark.style.top = `${-v}px`
@@ -97,6 +101,7 @@ export default {
       if (iconDown.style.transform === 'rotate(180deg)') {
         iconDown.style.transform = 'rotate(0deg)'
       }
+      this.isFixed = false
     },
     afterThreshold (v) {
       this.$refs.ebookBookmark.style.top = `${-v}px`
@@ -104,9 +109,11 @@ export default {
       if (this.isBookmark) {
         this.text = '松手删除书签'
         this.color = WHITE
+        this.isFixed = false
       } else {
         this.text = '松手添加书签'
         this.color = BLUE
+        this.isFixed = true
       }
 
       const iconDown = this.$refs.iconDown
