@@ -53,6 +53,8 @@ export default {
         this.afterThreshold(v)
       } else if (v > 0 && v < this.height) {
         this.beforeHight()
+      } else if (v === 0) {
+        this.restore()
       }
     },
     isBookmark (v) {
@@ -73,6 +75,12 @@ export default {
     }
   },
   methods: {
+    restore () {
+      setTimeout(() => {
+        this.$refs.ebookBookmark.style.top = `${-this.height}px`
+        this.$refs.iconDown.style.transform = 'rotate(0deg)'
+      }, 200)
+    },
     beforeHight () {
       if (this.isBookmark) {
         this.text = '下拉删除书签'
