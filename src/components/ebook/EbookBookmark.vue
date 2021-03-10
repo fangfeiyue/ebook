@@ -49,8 +49,12 @@ export default {
     offsetY (v) {
       if (v >= this.height && v <= this.threshold) { // 第二阶段
         this.$refs.ebookBookmark.style.top = `${-v}px`
+        this.text = '下拉添加书签'
+        this.color = WHITE
       } else if (v >= this.threshold) { // 第三阶段
         this.$refs.ebookBookmark.style.top = `${-v}px`
+        this.text = '松手添加书签'
+        this.color = BLUE
       }
     },
     isBookmark (v) {
