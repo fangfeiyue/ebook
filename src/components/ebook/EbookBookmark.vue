@@ -49,6 +49,7 @@ export default {
     offsetY (v) {
       if (v >= this.height && v <= this.threshold) { // 第二阶段
         console.log('到达第二阶段')
+        this.$refs.ebookBookmark.style.top = `${-v}px`
       } else if (v >= this.threshold) { // 第三阶段
         console.log('到达第三阶段')
       }
