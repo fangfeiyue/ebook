@@ -13,12 +13,14 @@ export default {
   },
   computed: {
     style () {
+      // 计算书签颜色
       return this.color ? {
         borderColor: `${this.color} ${this.color} transparent ${this.color}`
       } : {}
     }
   },
   methods: {
+    // 计算书签的高度
     refresh () {
       if (this.height && this.width && this.width > 0 && this.height > 10) {
         this.$refs.bookmark.style.borderWidth = `${px2rem(this.height - 5)}rem ${px2rem(this.width / 2)}rem ${px2rem(5)}rem ${px2rem(this.width / 2)}rem`

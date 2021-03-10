@@ -1,9 +1,9 @@
 <template>
   <div class="ebook" ref="reader">
-    <ebook-book-mark/>
     <ebook-title/>
     <ebook-reader/>
     <ebook-menu/>
+    <ebook-book-mark/>
   </div>
 </template>
 <script>
@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     move (v) {
-      console.log('ddd', v)
       this.$refs.reader.style.top = v + 'px'
     },
     restore () {

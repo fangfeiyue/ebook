@@ -8,7 +8,10 @@
         {{text}}
       </div>
     </div>
-    <div class="ebook-bookmark-icon-wrapper" :style="fixed && !isPaginating ? fixedStyle : {}">
+    <!-- <div class="ebook-bookmark-icon-wrapper" :style="fixed && !isPaginating ? fixedStyle : {}">
+      <book-mark :width="15" :height="35" :color="color" ref="bookmark"></book-mark>
+    </div> -->
+    <div class="ebook-bookmark-icon-wrapper">
       <book-mark :width="15" :height="35" :color="color" ref="bookmark"></book-mark>
     </div>
   </div>
@@ -27,6 +30,7 @@ export default {
     BookMark
   },
   computed: {
+    // 书签拖动到多高到达临界点，因为realPx需要反复运算，所以这里定位计算属性
     height () {
       return realPx(35)
     },
@@ -43,70 +47,10 @@ export default {
   },
   watch: {
     offsetY (v) {
-      if (this.settingVisible > 0 || this.menuVisible || this.isPaginating) {
-        return
-      }
-      if (v >= this.height && v < this.threshold) {
-        this.setBookmark = false
-        this.$refs.ebookBookmark.style.top = `${-v}px`
-        if (this.$refs.iconDown.style.transform === 'rotate(180deg)') {
-          this.$refs.iconDown.style.transform = 'rotate(0deg)'
-        }
-        if (!this.isBookmark) {
-          this.text = this.$t('book.pulldownAddMark')
-          this.color = WHITE
-        } else {
-          this.text = this.$t('book.pulldownDeleteMark')
-          this.color = BLUE
-        }
-      } else if (v >= this.threshold) {
-        this.setBookmark = true
-        this.$refs.ebookBookmark.style.top = `${-v}px`
-        if (this.$refs.iconDown.style.transform === 'rotate(0deg)' ||
-          this.$refs.iconDown.style.transform === '') {
-          this.$refs.iconDown.style.transform = 'rotate(180deg)'
-        }
-        if (!this.isBookmark) {
-          this.text = this.$t('book.releaseAddMark')
-          this.color = BLUE
-        } else {
-          this.text = this.$t('book.releaseDeleteMark')
-          this.color = WHITE
-        }
-      } else if (v > 0 && v < this.height) {
-        this.setBookmark = false
-        if (!this.isBookmark) {
-          this.text = this.$t('book.pulldownAddMark')
-        } else {
-          this.text = this.$t('book.pulldownDeleteMark')
-        }
-      } else if (v === 0) {
-        if (!this.isBookmark) {
-          if (this.setBookmark) {
-            this.fixed = true
-            this.setAndSaveBookmark()
-          } else {
-            this.fixed = false
-          }
-        } else {
-          if (this.setBookmark) {
-            this.fixed = false
-            this.removeBookmark()
-          } else {
-            this.fixed = true
-          }
-        }
-        setTimeout(() => {
-          this.$refs.ebookBookmark.style.top = `${-this.height}px`
-          this.$refs.iconDown.style.transform = 'rotate(0deg)'
-          if (!this.fixed && this.color === BLUE) {
-            this.color = WHITE
-          }
-          if (this.text === this.$t('book.releaseAddMark')) {
-            this.text = this.$t('book.pulldownAddMark')
-          }
-          this.setBookmark = false
-        }, 200)
+      if (v >= this.height && v <= this.threshold) { // 第二阶段
+        console.log('到达第二阶段')
+      } else if (v >= this.threshold) { // 第三阶段
+        console.log('到达第三阶段')
       }
     },
     isBookmark (v) {
@@ -121,7 +65,7 @@ export default {
   data () {
     return {
       color: WHITE,
-      text: 'jlkj',
+      text: '',
       setBookmark: false,
       fixed: false
     }
@@ -176,7 +120,6 @@ export default {
     z-index: 200;
     width: 100%;
     height: px2rem(35);
-    background: red;
     .ebook-bookmark-text-wrapper {
       position: absolute;
       right: px2rem(45);
