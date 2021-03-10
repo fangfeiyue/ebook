@@ -48,23 +48,11 @@ export default {
   watch: {
     offsetY (v) {
       if (v >= this.height && v <= this.threshold) { // 第二阶段
-        this.$refs.ebookBookmark.style.top = `${-v}px`
-        this.text = '下拉添加书签'
-        this.color = WHITE
-
-        const iconDown = this.$refs.iconDown
-        if (iconDown.style.transform === 'rotate(180deg)') {
-          iconDown.style.transform = 'rotate(0deg)'
-        }
+        this.beforeThreshold(v)
       } else if (v >= this.threshold) { // 第三阶段
-        this.$refs.ebookBookmark.style.top = `${-v}px`
-        this.text = '松手添加书签'
-        this.color = BLUE
-
-        const iconDown = this.$refs.iconDown
-        if (iconDown.style.transform === '' || iconDown.style.transform === 'rotate(0deg)') {
-          iconDown.style.transform = 'rotate(180deg)'
-        }
+        this.afterThreshold(v)
+      } else if (v > 0 && v < this.height) {
+        this.beforeHight()
       }
     },
     isBookmark (v) {
@@ -85,6 +73,39 @@ export default {
     }
   },
   methods: {
+    beforeHight () {
+      if (this.isBookmark) {
+        this.text = '下拉删除书签'
+        this.color = BLUE
+      } else {
+        this.text = '下拉添加书签'
+        this.color = WHITE
+      }
+    },
+    beforeThreshold (v) {
+      this.$refs.ebookBookmark.style.top = `${-v}px`
+      this.beforeHight()
+      const iconDown = this.$refs.iconDown
+      if (iconDown.style.transform === 'rotate(180deg)') {
+        iconDown.style.transform = 'rotate(0deg)'
+      }
+    },
+    afterThreshold (v) {
+      this.$refs.ebookBookmark.style.top = `${-v}px`
+
+      if (this.isBookmark) {
+        this.text = '松手删除书签'
+        this.color = WHITE
+      } else {
+        this.text = '松手添加书签'
+        this.color = BLUE
+      }
+
+      const iconDown = this.$refs.iconDown
+      if (iconDown.style.transform === '' || iconDown.style.transform === 'rotate(0deg)') {
+        iconDown.style.transform = 'rotate(180deg)'
+      }
+    },
     setAndSaveBookmark () {
       this.bookmark = getBookmark(this.fileName)
       if (!this.bookmark) {
