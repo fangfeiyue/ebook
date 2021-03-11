@@ -1,10 +1,11 @@
 <template>
   <div class="ebook" ref="reader">
-    <ebook-header></ebook-header>
+    <ebook-header/>
     <ebook-title/>
     <ebook-reader/>
     <ebook-menu/>
     <ebook-book-mark/>
+    <ebook-footer/>
   </div>
 </template>
 <script>
@@ -13,6 +14,7 @@ import EbookMenu from '../../components/ebook/EbookMenu'
 import EbookReader from '../../components/ebook/EbookReader'
 import EbookTitle from '../../components/ebook/EbookTitle'
 import EbookBookMark from '../../components/ebook/EbookBookmark'
+import EbookFooter from '../../components/ebook/EbookFooter'
 import { getReadTime, saveReadTime } from '../../utils/utils'
 import { ebookMixin } from '../../mixin/mixin'
 export default {
@@ -20,6 +22,7 @@ export default {
   components: {
     EbookMenu,
     EbookTitle,
+    EbookFooter,
     EbookHeader,
     EbookReader,
     EbookBookMark
