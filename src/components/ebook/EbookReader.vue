@@ -186,6 +186,7 @@ export default {
     },
     onMouseEnter (e) {
       this.mouseState = 1
+      this.mouseStartTime = e.timeStamp
       e.preventDefault()
       e.stopPropagation()
     },
@@ -208,6 +209,8 @@ export default {
       } else {
         this.mouseState = 4
       }
+      const time = e.timeStamp - this.mouseStartTime
+      if (time < 300) this.mouseState = 4
       e.preventDefault()
       e.stopPropagation()
     }
