@@ -174,7 +174,7 @@ export default {
     position: absolute;
     top: px2rem(-35);
     left: 0;
-    z-index: 200;
+    z-index: 160;
     width: 100%;
     height: px2rem(35);
     .ebook-bookmark-text-wrapper {
@@ -201,15 +201,3 @@ export default {
     }
   }
 </style>
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 181 ~ addBookmark ~ cifstart", cifstart)
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 183 ~ addBookmark ~ cifstart", cifstart)
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 185 ~ addBookmark ~ cifstart", cifstart)
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 187 ~ addBookmark ~ cifstart", cifstart)
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 189 ~ addBookmark ~ cifstart", cifstart)
-
-      console.log("🚀 ~ file: EbookBookMark.vue ~ line 191 ~ addBookmark ~ cifstart", cifstart)
