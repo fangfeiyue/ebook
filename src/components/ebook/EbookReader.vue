@@ -3,6 +3,9 @@
     <div class="ebook-reader-mask"
       @touchmove="move"
       @touchend="moveEnd"
+      @mousedown.left="onMouseEnter"
+      @mousemove.left="onMouseMove"
+      @mouseup.left="onMouseEnd"
       @click="onMaskClick">
     </div>
     <div id="reader"></div>
@@ -116,8 +119,8 @@ export default {
     initRender () {
       this.reader = this.book.renderTo('reader', {
         width: innerWidth,
-        height: innerHeight,
-        method: 'default'
+        height: innerHeight
+        // method: 'default'
         // flow: 'scrolled' // 微信端和苹果手机暂不支持
       })
       const location = getLocation(this.fileName)
@@ -159,6 +162,7 @@ export default {
       this.initPaging()
     },
     onMaskClick (e) {
+      if (this.mouseState && (this.mouseState === 2 || this.mouseState === 3)) return
       const offsetX = e.offsetX
       const width = window.innerWidth
       if (offsetX > 0 && offsetX < width * 0.3) {
@@ -179,6 +183,33 @@ export default {
     moveEnd () {
       this.setOffsetY(0)
       this.firstOffsetY = null
+    },
+    onMouseEnter (e) {
+      this.mouseState = 1
+      e.preventDefault()
+      e.stopPropagation()
+    },
+    onMouseMove (e) {
+      if (this.mouseState === 1) {
+        this.mouseState = 2
+      } else if (this.mouseState === 2) {
+        if (this.menuVisible || !this.bookAvailable) return
+
+        this.firstOffsetY ? this.setOffsetY(e.clientY - this.firstOffsetY) : this.firstOffsetY = e.clientY
+      }
+      e.preventDefault()
+      e.stopPropagation()
+    },
+    onMouseEnd (e) {
+      if (this.mouseState === 2) {
+        this.setOffsetY(0)
+        this.firstOffsetY = null
+        this.mouseState = 3
+      } else {
+        this.mouseState = 4
+      }
+      e.preventDefault()
+      e.stopPropagation()
     }
   }
 }
