@@ -147,6 +147,32 @@ export default {
         return this.book.locations.generate(750 * (window.innerWidth / 375) * (getFontSize(this.fileName) / 16))
       }).then(locations => {
         // console.log(locations)
+
+        this.navigation.forEach(nav => {
+          nav.pageList = []
+        })
+
+        locations.forEach(item => {
+          const l = item.match(/\[(.*)\]!/)[1]
+          this.navigation.forEach(nav => {
+            if (nav.href) {
+              const href = nav.href.match(/^(.*)\.html$/)[1]
+              if (href === l) {
+                nav.pageList.push(item)
+              }
+            }
+          })
+          let curPage = 1
+          this.navigation.forEach((nav, index) => {
+            if (index === 0) {
+              nav.page = 1
+            } else {
+              nav.page = curPage
+            }
+            curPage += nav.pageList.length + 1
+          })
+        })
+
         this.setBookAvailable(true)
         // 分页完成后
         this.refreshContent()
