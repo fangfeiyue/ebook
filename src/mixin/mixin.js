@@ -85,10 +85,18 @@ export const ebookMixin = {
     },
     displayBook (target, cb) {
       const reader = this.currentBook.rendition
-      reader.display(target).then(() => {
-        cb && cb()
-        this.refreshContent()
-      })
+      if (target) {
+        reader.display(target).then(() => {
+          cb && cb()
+          this.refreshContent()
+        })
+      } else {
+        reader.display().then(() => {
+          cb && cb()
+          this.refreshContent()
+        })
+      }
+
       return target
     },
     hide () {
