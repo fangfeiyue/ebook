@@ -28,6 +28,9 @@ export const ebookMixin = {
     ]),
     themeList () {
       return themeList()
+    },
+    sectionName () {
+      return this.section && this.navigation ? this.navigation[this.section].label : '未知章节'
     }
   },
   methods: {

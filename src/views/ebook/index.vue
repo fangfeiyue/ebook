@@ -1,5 +1,6 @@
 <template>
   <div class="ebook" ref="reader">
+    <ebook-header></ebook-header>
     <ebook-title/>
     <ebook-reader/>
     <ebook-menu/>
@@ -7,6 +8,7 @@
   </div>
 </template>
 <script>
+import EbookHeader from '../../components/ebook/EbookHeader'
 import EbookMenu from '../../components/ebook/EbookMenu'
 import EbookReader from '../../components/ebook/EbookReader'
 import EbookTitle from '../../components/ebook/EbookTitle'
@@ -18,6 +20,7 @@ export default {
   components: {
     EbookMenu,
     EbookTitle,
+    EbookHeader,
     EbookReader,
     EbookBookMark
   },

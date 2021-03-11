@@ -40,13 +40,7 @@ export default {
   mixins: [ebookMixin],
   data () {
     return {
-      readingTime: 0,
-      getSectionName: 1
-    }
-  },
-  computed: {
-    sectionName () {
-      return this.section && this.navigation ? this.navigation[this.section].label : '未知章节'
+      readingTime: 0
     }
   },
   watch: {
