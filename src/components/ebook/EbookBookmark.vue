@@ -151,7 +151,7 @@ export default {
         console.log('text', text)
         this.bookmark.push({
           // 用于判断当前页是不是书签页
-          cif: cur.start.cfi,
+          cfi: cur.start.cfi,
           // 用于显示文本
           text
         })
@@ -159,6 +159,13 @@ export default {
       })
     },
     removeBookmark () {
+      this.bookmark = getBookmark(this.fileName)
+      const cur = this.currentBook.rendition.currentLocation()
+      const startcfi = cur.start.cfi
+      if (this.bookmark) {
+        saveBookmark(this.fileName, this.bookmark.filter(item => item.cfi !== startcfi))
+        this.setIsBookmark(false)
+      }
     }
   }
 }
