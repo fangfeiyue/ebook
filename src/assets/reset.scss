@@ -52,4 +52,6 @@ html, body {
   user-select: none;
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  // 修复微信端翻页页面闪烁的问题
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
