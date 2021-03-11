@@ -17,7 +17,11 @@
 <script type="text/ecmascript-6">
 import BookMark from './Bookmark'
 import { ebookMixin } from '../../mixin/mixin'
-import { realPx, saveBookmark, getBookmark } from '../../utils/utils'
+import {
+  realPx,
+  getBookmark,
+  saveBookmark
+} from '../../utils/utils'
 
 const BLUE = '#346cbc'
 const WHITE = '#fff'
@@ -80,19 +84,22 @@ export default {
 
       if (this.isFixed) {
         this.setIsBookmark(true)
+        this.addBookmark()
       } else {
         this.setIsBookmark(false)
+        this.removeBookmark()
       }
     },
     beforeHight () {
       if (this.isBookmark) {
         this.text = '下拉删除书签'
         this.color = BLUE
+        this.isFixed = true
       } else {
         this.text = '下拉添加书签'
         this.color = WHITE
+        this.isFixed = false
       }
-      this.isFixed = false
     },
     beforeThreshold (v) {
       this.$refs.ebookBookmark.style.top = `${-v}px`
@@ -101,7 +108,6 @@ export default {
       if (iconDown.style.transform === 'rotate(180deg)') {
         iconDown.style.transform = 'rotate(0deg)'
       }
-      this.isFixed = false
     },
     afterThreshold (v) {
       this.$refs.ebookBookmark.style.top = `${-v}px`
@@ -121,40 +127,38 @@ export default {
         iconDown.style.transform = 'rotate(180deg)'
       }
     },
-    setAndSaveBookmark () {
+    addBookmark () {
       this.bookmark = getBookmark(this.fileName)
-      if (!this.bookmark) {
-        this.bookmark = []
-      }
-      const currentLocation = this.currentBook.rendition.currentLocation()
-      const cfibase = currentLocation.start.cfi.replace(/!.*/, '').replace('epubcfi(', '')
-      const cfistart = currentLocation.start.cfi.replace(/.*!/, '').replace(/\)/, '')
-      const cfiend = currentLocation.end.cfi.replace(/.*!/, '').replace(/\)/, '')
-      const cfiRange = `epubcfi(${cfibase}!,${cfistart},${cfiend})`
-      const cfi = currentLocation.start.cfi
-      this.currentBook.getRange(cfiRange).then(range => {
-        let text = range.toString()
-        text = text.replace(/\s\s/g, '')
-        text = text.replace(/\r/g, '')
-        text = text.replace(/\n/g, '')
-        text = text.replace(/\t/g, '')
-        text = text.replace(/\f/g, '')
+      if (!this.bookmark) this.bookmark = []
+
+      const cur = this.currentBook.rendition.currentLocation()
+      console.log('curcur', cur)
+      // start.cfi = 'epubcfi(/6/28[A370011_1_En_6_Chapter]!/4/8/10[Sec5]/6[Par21]/5:76)'
+      // end.cfi = 'epubcfi(/6/28[A370011_1_En_6_Chapter]!/4/8/10[Sec5]/8[Par22]/5:183)'
+      // 取出cfi叹号前面的部分
+      const cfibase = cur.start.cfi.replace(/!.*/, '')
+      // 取出cfi后面的部分
+      const cfistart = cur.start.cfi.replace(/.*!/, '').replace(/\)$/, '')
+      const cfiend = cur.end.cfi.replace(/.*!/, '').replace(/\)$/, '')
+      console.log('cfibase', cfibase) // epubcfi(/6/28[A370011_1_En_6_Chapter]
+      console.log('cfistart', cfistart) // /4/8/10[Sec5]/6[Par21]/5:76
+      console.log('cfiend', cfiend) // /4/8/10[Sec5]/8[Par22]/5:183
+      const cfirange = `${cfibase}!,${cfistart},${cfiend})`
+      console.log('cfirange', cfirange) // epubcfi(/6/28[A370011_1_En_6_Chapter]!/4/8/10[Sec5]/6[Par21]/5:76,/4/8/10[Sec5]/8[Par22]/5:183)
+      this.currentBook.getRange(cfirange).then(range => {
+        console.log('range', range.toString())
+        const text = range.toString().replace(/\$\$/g, '')
+        console.log('text', text)
         this.bookmark.push({
-          cfi: cfi,
-          text: text
+          // 用于判断当前页是不是书签页
+          cif: cur.start.cfi,
+          // 用于显示文本
+          text
         })
-        this.setIsBookmark(true)
         saveBookmark(this.fileName, this.bookmark)
       })
     },
     removeBookmark () {
-      const currentLocation = this.currentBook.rendition.currentLocation()
-      const cfi = currentLocation.start.cfi
-      if (this.bookmark) {
-        this.bookmark = this.bookmark.filter(item => item.cfi !== cfi)
-        saveBookmark(this.fileName, this.bookmark)
-      }
-      this.setIsBookmark(false)
     }
   }
 }
@@ -194,3 +198,15 @@ export default {
     }
   }
 </style>
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 181 ~ addBookmark ~ cifstart", cifstart)
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 183 ~ addBookmark ~ cifstart", cifstart)
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 185 ~ addBookmark ~ cifstart", cifstart)
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 187 ~ addBookmark ~ cifstart", cifstart)
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 189 ~ addBookmark ~ cifstart", cifstart)
+
+      console.log("🚀 ~ file: EbookBookMark.vue ~ line 191 ~ addBookmark ~ cifstart", cifstart)
