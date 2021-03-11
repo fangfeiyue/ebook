@@ -172,7 +172,7 @@ export default {
             curPage += nav.pageList.length + 1
           })
         })
-
+        this.setPagelist(locations)
         this.setBookAvailable(true)
         // 分页完成后
         this.refreshContent()

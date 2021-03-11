@@ -89,6 +89,17 @@ export const ebookMixin = {
       const bookmark = getBookmark(this.fileName)
       console.log(bookmark)
       bookmark && bookmark.some(item => item.cfi === cfi) ? this.setIsBookmark(true) : this.setIsBookmark(false)
+      if (this.pagelist) {
+        const totalPage = this.pagelist.length
+        const curPage = curLocation.start.location
+        if (curPage && curPage > 0) {
+          this.setPaginate(curPage + ' / ' + totalPage)
+        } else {
+          this.setPaginate('')
+        }
+      } else {
+        this.setPaginate('')
+      }
     },
     displayBook (target, cb) {
       const reader = this.currentBook.rendition
