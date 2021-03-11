@@ -58,13 +58,9 @@ export default {
         this.restore()
       }
     },
-    isBookmark (v) {
-      this.fixed = v
-      if (v) {
-        this.color = BLUE
-      } else {
-        this.color = WHITE
-      }
+    isBookmark (isBookmark) {
+      this.isFixed = isBookmark
+      this.color = isBookmark ? BLUE : WHITE
     }
   },
   data () {

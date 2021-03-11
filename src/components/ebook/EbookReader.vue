@@ -3,9 +3,6 @@
     <div class="ebook-reader-mask"
       @touchmove="move"
       @touchend="moveEnd"
-      @mousedown.left="onMouseEnter"
-      @mousemove.left="onMouseMove"
-      @mouseup.left="onMouseEnd"
       @click="onMaskClick">
     </div>
     <div id="reader"></div>

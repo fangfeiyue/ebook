@@ -1,6 +1,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import { themeList } from '../config/config'
-import { addCssFile, clearPreTheme, saveLocation, getReadTime } from '../utils/utils'
+import { addCssFile, clearPreTheme, saveLocation, getReadTime, getBookmark } from '../utils/utils'
 
 export const ebookMixin = {
   computed: {
@@ -82,6 +82,10 @@ export const ebookMixin = {
       this.setProgress(Math.floor(progress * 100))
       this.setSection(curLocation.start.index)
       saveLocation(this.fileName, cfi)
+      // 渲染当前页时判断当前页是否显示书签
+      const bookmark = getBookmark(this.fileName)
+      console.log(bookmark)
+      bookmark && bookmark.some(item => item.cfi === cfi) ? this.setIsBookmark(true) : this.setIsBookmark(false)
     },
     displayBook (target, cb) {
       const reader = this.currentBook.rendition
