@@ -33,7 +33,7 @@
 <script type="text/ecmascript-6">
 import EbookLoading from './EbookLoading'
 import EbookContent from './EbookSlideContent'
-// import EbookBookmark from './EbookSlideBookmark'
+import EbookBookmark from './EbookSlideBookmark'
 import { ebookMixin } from '../../mixin/mixin'
 
 export default {
@@ -44,8 +44,8 @@ export default {
   data () {
     return {
       tab: 1,
-      content: EbookContent
-      // bookmark: EbookBookmark
+      content: EbookContent,
+      bookmark: EbookBookmark
     }
   },
   methods: {
