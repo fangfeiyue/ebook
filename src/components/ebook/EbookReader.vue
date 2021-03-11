@@ -1,10 +1,10 @@
 <template>
   <div class="ebook-reader">
-    <div class="ebook-reader-mask"
+    <!-- <div class="ebook-reader-mask"
       @touchmove="move"
       @touchend="moveEnd"
       @click="onMaskClick">
-    </div>
+    </div> -->
     <div id="reader"></div>
   </div>
 </template>
@@ -116,7 +116,8 @@ export default {
     initRender () {
       this.reader = this.book.renderTo('reader', {
         width: innerWidth,
-        height: innerHeight
+        height: innerHeight,
+        flow: 'scrolled'
       })
       const location = getLocation(this.fileName)
       this.displayBook(location, () => {
