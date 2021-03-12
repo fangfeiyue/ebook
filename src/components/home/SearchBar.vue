@@ -14,6 +14,7 @@
       <span class="icon-back icon"></span>
     </div>
     <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
+      <div class="search-bar-blank"></div>
       <div class="search-bar-input">
         <span class="icon-search icon"></span>
         <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText">
@@ -94,14 +95,20 @@ export default {
       z-index: 100;
       width: 100%;
       height: px2rem(52);
+      display: flex;
       padding: px2rem(10);
       box-sizing: border-box;
       transition: top .2s linear;
       &.hide-title {
         top: 0;
       }
+      .search-bar-blank {
+        flex: 0 0 px2rem(31);
+        width: px2rem(31);
+      }
       .search-bar-input {
         width: 100%;
+        flex: 1;
         border-radius: px2rem(20);
         background-color: #f4f4f4;
         padding: px2rem(5) px2rem(15);
