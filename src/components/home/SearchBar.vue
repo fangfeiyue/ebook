@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar" :class="{'hide-title': !titleVisible}">
+  <div class="search-bar" :class="{'hide-title': !titleVisible, 'hide-shadow': !shadowVisible}">
     <transition name="title">
       <div class="search-bar-title-wrapper" v-show="titleVisible">
         <div class="title-text-wrapper">
@@ -29,7 +29,8 @@ export default {
   data () {
     return {
       searchText: '',
-      titleVisible: true
+      titleVisible: true,
+      shadowVisible: false
     }
   },
   watch: {
@@ -37,8 +38,10 @@ export default {
       console.log(offsetY)
       if (offsetY > 0) {
         this.hideTile()
+        this.showShadow()
       } else {
         this.showTitle()
+        this.hideShadow()
       }
     }
   },
@@ -48,6 +51,12 @@ export default {
     },
     showTitle () {
       this.titleVisible = true
+    },
+    hideShadow () {
+      this.shadowVisible = false
+    },
+    showShadow () {
+      this.shadowVisible = true
     }
   }
 }
@@ -59,8 +68,12 @@ export default {
     position: relative;
     width: 100%;
     height: px2rem(94);
+    box-shadow: 0 px2rem(2) px2rem(2) 0 rgba(0, 0, 0, .1);
     &.hide-title {
       height: px2rem(52);
+    }
+    &.hide-shadow {
+      box-shadow: none;
     }
     .search-bar-title-wrapper {
       width: 100%;
