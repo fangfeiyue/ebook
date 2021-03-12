@@ -4,17 +4,20 @@
     <scroll :top="94" @onScroll="onScroll">
       <div v-for="(item, index) in list" :key="index">11111111111111111</div>
     </scroll>
+    <footer-guide></footer-guide>
   </div>
 </template>
 <script>
 import { homeMixin } from '../../mixin/homeMixin'
 import Scroll from '../../components/common/Scroll.vue'
 import SearchBar from '../../components/home/SearchBar.vue'
+import FooterGuide from '../../components/footer/Footer.vue'
 export default {
   mixins: [homeMixin],
   components: {
     SearchBar,
-    Scroll
+    Scroll,
+    FooterGuide
   },
   data () {
     return {
