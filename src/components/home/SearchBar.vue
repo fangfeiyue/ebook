@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <div class="search-bar-title-wrapper">
+    <div class="search-bar-title-wrapper" v-show="titleVisible">
       <div class="title-icon-back-wrapper">
         <span class="icon-back icon"></span>
       </div>
@@ -20,10 +20,31 @@
   </div>
 </template>
 <script>
+import { homeMixin } from '../../mixin/homeMixin'
 export default {
+  mixins: [homeMixin],
   data () {
     return {
-      searchText: ''
+      searchText: '',
+      titleVisible: true
+    }
+  },
+  watch: {
+    offsetY (offsetY) {
+      console.log(offsetY)
+      if (offsetY > 0) {
+        this.hideTile()
+      } else {
+        this.showTitle()
+      }
+    }
+  },
+  methods: {
+    hideTile () {
+      this.titleVisible = false
+    },
+    showTitle () {
+      this.titleVisible = true
     }
   }
 }
@@ -34,6 +55,7 @@ export default {
   .search-bar {
     position: relative;
     width: 100%;
+    height: px2rem(94);
     .search-bar-title-wrapper {
       width: 100%;
       height: px2rem(42);
