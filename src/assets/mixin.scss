@@ -204,3 +204,14 @@ $homeAnimationTime: .5s;
 .opacity-slide-up-enter-active, .opacity-slide-up-leave-active {
   transition: all $homeAnimationTime linear;
 }
+
+.icon {
+  color: #666;
+  font-size: px2rem(16);
+}
+
+.title {
+  color: #666;
+  font-size: px2rem(16);
+  font-weight: bold;
+}
