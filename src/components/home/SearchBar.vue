@@ -2,9 +2,6 @@
   <div class="search-bar" :class="{'hide-title': !titleVisible}">
     <transition name="title">
       <div class="search-bar-title-wrapper" v-show="titleVisible">
-        <div class="title-icon-back-wrapper">
-          <span class="icon-back icon"></span>
-        </div>
         <div class="title-text-wrapper">
           <span class="title-text title">书城</span>
         </div>
@@ -13,7 +10,10 @@
         </div>
       </div>
     </transition>
-    <div class="search-bar-input-wrapper">
+    <div class="title-icon-back-wrapper">
+      <span class="icon-back icon"></span>
+    </div>
+    <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
       <div class="search-bar-input">
         <span class="icon-search icon"></span>
         <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText">
@@ -64,16 +64,9 @@ export default {
     .search-bar-title-wrapper {
       width: 100%;
       height: px2rem(42);
-      position: relative;
+      position: absolute;
       top: 0;
       left: 0;
-      .title-icon-back-wrapper {
-        position: absolute;
-        left: px2rem(15);
-        top: 0;
-        height: px2rem(42);
-        @include center;
-      }
       .title-text-wrapper {
         width: 100%;
         height: px2rem(42);
@@ -87,11 +80,26 @@ export default {
         @include center;
       }
     }
+    .title-icon-back-wrapper {
+      position: absolute;
+      left: px2rem(15);
+      top: 0;
+      height: px2rem(42);
+      @include center;
+    }
     .search-bar-input-wrapper {
+      position: absolute;
+      top: px2rem(42);
+      left: 0;
+      z-index: 100;
       width: 100%;
       height: px2rem(52);
       padding: px2rem(10);
       box-sizing: border-box;
+      transition: top .2s linear;
+      &.hide-title {
+        top: 0;
+      }
       .search-bar-input {
         width: 100%;
         border-radius: px2rem(20);
