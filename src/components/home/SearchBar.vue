@@ -10,7 +10,7 @@
         </div>
       </div>
     </transition>
-    <div class="title-icon-back-wrapper">
+    <div class="title-icon-back-wrapper" :class="{'hide-title': !titleVisible}">
       <span class="icon-back icon"></span>
     </div>
     <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
@@ -86,7 +86,11 @@ export default {
       left: px2rem(15);
       top: 0;
       height: px2rem(42);
+      transition: height .2s linear;
       @include center;
+      &.hide-title {
+        height: px2rem(52);
+      }
     }
     .search-bar-input-wrapper {
       position: absolute;
