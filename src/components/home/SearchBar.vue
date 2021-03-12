@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar">
+  <div class="search-bar" :class="{'hide-title': !titleVisible}">
     <div class="search-bar-title-wrapper" v-show="titleVisible">
       <div class="title-icon-back-wrapper">
         <span class="icon-back icon"></span>
@@ -56,6 +56,9 @@ export default {
     position: relative;
     width: 100%;
     height: px2rem(94);
+    &.hide-title {
+      height: px2rem(52);
+    }
     .search-bar-title-wrapper {
       width: 100%;
       height: px2rem(42);
