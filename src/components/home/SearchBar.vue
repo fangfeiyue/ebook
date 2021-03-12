@@ -1,16 +1,18 @@
 <template>
   <div class="search-bar" :class="{'hide-title': !titleVisible}">
-    <div class="search-bar-title-wrapper" v-show="titleVisible">
-      <div class="title-icon-back-wrapper">
-        <span class="icon-back icon"></span>
+    <transition name="title">
+      <div class="search-bar-title-wrapper" v-show="titleVisible">
+        <div class="title-icon-back-wrapper">
+          <span class="icon-back icon"></span>
+        </div>
+        <div class="title-text-wrapper">
+          <span class="title-text title">书城</span>
+        </div>
+        <div class="title-icon-shake-wrapper">
+          <span class="icon-shake icon"></span>
+        </div>
       </div>
-      <div class="title-text-wrapper">
-        <span class="title-text title">书城</span>
-      </div>
-      <div class="title-icon-shake-wrapper">
-        <span class="icon-shake icon"></span>
-      </div>
-    </div>
+    </transition>
     <div class="search-bar-input-wrapper">
       <div class="search-bar-input">
         <span class="icon-search icon"></span>
