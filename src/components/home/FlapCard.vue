@@ -3,8 +3,8 @@
     <div class="flap-card-bg">
       <div class="flap-card" v-for="item in flapCardList" :key="item.zIndex" :style="{zIndex: item.zIndex}">
         <div class="flap-card-circle">
-          <div class="flap-card-semi-circle flap-card-semi-circle-left" :style="semiCricelStyle(item, 'left')"></div>
-          <div class="flap-card-semi-circle flap-card-semi-circle-right" :style="semiCricelStyle(item, 'right')"></div>
+          <div class="flap-card-semi-circle flap-card-semi-circle-left" :style="semiCricelStyle(item, 'left')" ref="left"></div>
+          <div class="flap-card-semi-circle flap-card-semi-circle-right" :style="semiCricelStyle(item, 'right')" ref="right"></div>
         </div>
       </div>
     </div>
@@ -88,7 +88,30 @@ export default {
         backgroundImage: direction === 'left' ? item.imgLeft : item.imgRight,
         backgroundSize: item.backgroundSize
       }
+    },
+    /*
+      index: 第几个圆
+      type：
+    */
+    rotate (index, type) {
+      const item = this.flapCardList[index]
+      const dom = type === 'front' ? this.$refs.right[index] : this.$refs.left[index]
+      dom.style.transform = `rotateY(${item.rotateDegree}deg)`
+      dom.style.backgroundColor = `rgb(${item.r} ,${item._g} ,${item.b})`
+    },
+    startFlapCardAnimation () {
+      this.timer = setInterval(() => {
+        const item = this.flapCardList[0]
+        item.rotateDegree += 10
+        item._g += 5
+        this.rotate(0, 'front')
+
+        // this.rotate(1, 'back')
+      }, 100)
     }
+  },
+  mounted () {
+    this.startFlapCardAnimation()
   }
 }
 </script>
