@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <hot-search-list v-show="searchListVisible"/>
+    <hot-search-list v-show="searchListVisible" ref="searchList"/>
   </div>
 </template>
 <script>
@@ -51,6 +51,10 @@ export default {
         this.showTitle()
         this.hideShadow()
       }
+    },
+    hotSearchOffsetY (offsetY) {
+      console.log('hotSearch', offsetY)
+      offsetY > 0 ? this.showShadow() : this.hideShadow()
     }
   },
   methods: {
@@ -68,15 +72,27 @@ export default {
     },
     hideSearchList () {
       this.searchListVisible = false
+      if (this.offsetY > 0) {
+        this.hideTile()
+        this.showShadow()
+      } else {
+        this.showTitle()
+        this.hideShadow()
+      }
     },
     showSearchList () {
       this.hideTile()
+      this.hideShadow()
       this.searchListVisible = true
+      this.$nextTick(() => {
+        this.$refs.searchList.reset()
+      })
     },
     handleBack () {
       console.log('点击了返回')
       this.showTitle()
       this.hideSearchList()
+      this.offsetY > 0 ? this.showShadow() : this.hideShadow()
     }
   }
 }
