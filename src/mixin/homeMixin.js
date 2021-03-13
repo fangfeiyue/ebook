@@ -1,9 +1,15 @@
 import { mapGetters, mapActions } from 'vuex'
 export const homeMixin = {
   computed: {
-    ...mapGetters(['offsetY'])
+    ...mapGetters([
+      'offsetY',
+      'hotSearchOffsetY'
+    ])
   },
   methods: {
-    ...mapActions(['setOffsetY'])
+    ...mapActions([
+      'setOffsetY',
+      'setHotSearchOffsetY'
+    ])
   }
 }

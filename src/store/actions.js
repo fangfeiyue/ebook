@@ -56,6 +56,9 @@ const actions = {
   setIsBookmark ({ commit }, isBookmark) {
     return commit('setIsBookmark', isBookmark)
   },
+  setHotSearchOffsetY ({ commit }, offsetY) {
+    return commit('setHotSearchOffsetY', offsetY)
+  },
   setSpeakingIconBottom ({ commit }, speakingIconBottom) {
     return commit('setSpeakingIconBottom', speakingIconBottom)
   }

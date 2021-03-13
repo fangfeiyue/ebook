@@ -18,6 +18,7 @@ const book = {
   pagelist: state => state.book.pagelist,
   offsetY: state => state.book.offsetY,
   isBookmark: state => state.book.isBookmark,
+  hotSearchOffsetY: state => state.home.hotSearchOffsetY,
   speakingIconBottom: state => state.book.speakingIconBottom
 }
 
