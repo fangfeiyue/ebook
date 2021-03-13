@@ -19,6 +19,7 @@ export default {
   mixins: [homeMixin],
   data () {
     return {
+      interval: 100,
       flapCardList: [
         {
           r: 255,
@@ -94,9 +95,14 @@ export default {
       type：
     */
     rotate (index, type) {
+      // 获取属性值，因为flapCardList里存储着卡片的参数值
       const item = this.flapCardList[index]
+      // front代表正面，也就是右侧的半圆开始旋转
       const dom = type === 'front' ? this.$refs.right[index] : this.$refs.left[index]
+      if (!dom) return
+      // 设置旋转角度
       dom.style.transform = `rotateY(${item.rotateDegree}deg)`
+      // 设置背景颜色
       dom.style.backgroundColor = `rgb(${item.r} ,${item._g} ,${item.b})`
     },
     startFlapCardAnimation () {
@@ -105,9 +111,7 @@ export default {
         item.rotateDegree += 10
         item._g += 5
         this.rotate(0, 'front')
-
-        // this.rotate(1, 'back')
-      }, 100)
+      }, this.interval)
     }
   },
   mounted () {
@@ -165,14 +169,17 @@ export default {
             width: 50%;
             height: 100%;
             background-repeat: no-repeat;
+            backface-visibility: hidden;
           }
           .flap-card-semi-circle-left {
             border-radius: px2rem(24) 0 0 px2rem(24);
             background-position: center right;
+            transform-origin: right;
           }
           .flap-card-semi-circle-right {
             border-radius: 0 px2rem(24) px2rem(24) 0;
             background-position: center left;
+            transform-origin: left;
           }
         }
       }

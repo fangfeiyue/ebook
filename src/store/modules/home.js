@@ -1,7 +1,7 @@
 const home = {
   state: {
     hotSearchOffsetY: 0,
-    flapCardVisible: false
+    flapCardVisible: true
   },
   mutations: {
     setHotSearchOffsetY (state, offsetY) {
