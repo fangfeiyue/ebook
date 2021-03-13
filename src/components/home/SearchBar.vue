@@ -18,11 +18,11 @@
         <div class="search-bar-blank" :class="{'hide-title': !titleVisible}"></div>
         <div class="search-bar-input">
           <span class="icon-search icon"></span>
-          <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText">
+          <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText" @click="showSearchList">
         </div>
       </div>
     </div>
-    <hot-search-list/>
+    <hot-search-list v-show="searchListVisible"/>
   </div>
 </template>
 <script>
@@ -37,7 +37,8 @@ export default {
     return {
       searchText: '',
       titleVisible: true,
-      shadowVisible: false
+      shadowVisible: false,
+      searchListVisible: false
     }
   },
   watch: {
@@ -64,6 +65,12 @@ export default {
     },
     showShadow () {
       this.shadowVisible = true
+    },
+    hideSearchList () {
+      this.searchListVisible = false
+    },
+    showSearchList () {
+      this.searchListVisible = true
     }
   }
 }
