@@ -19,7 +19,8 @@ const book = {
   offsetY: state => state.book.offsetY,
   isBookmark: state => state.book.isBookmark,
   hotSearchOffsetY: state => state.home.hotSearchOffsetY,
-  speakingIconBottom: state => state.book.speakingIconBottom
+  speakingIconBottom: state => state.book.speakingIconBottom,
+  flapCardVisible: state => state.home.flapCardVisible
 }
 
 export default book

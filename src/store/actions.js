@@ -61,6 +61,9 @@ const actions = {
   },
   setSpeakingIconBottom ({ commit }, speakingIconBottom) {
     return commit('setSpeakingIconBottom', speakingIconBottom)
+  },
+  setFlapCardVisible ({ commit }, flapCardVisible) {
+    return commit('setFlapCardVisible', flapCardVisible)
   }
 }
 

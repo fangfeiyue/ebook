@@ -6,7 +6,7 @@
           <div class="title-text-wrapper">
             <span class="title-text title">书城</span>
           </div>
-          <div class="title-icon-shake-wrapper">
+          <div class="title-icon-shake-wrapper" @click="showFlapCard">
             <span class="icon-shake icon"></span>
           </div>
         </div>
@@ -93,6 +93,10 @@ export default {
       this.showTitle()
       this.hideSearchList()
       this.offsetY > 0 ? this.showShadow() : this.hideShadow()
+    },
+    showFlapCard () {
+      console.log('showFlapCard ')
+      this.setFlapCardVisible(true)
     }
   }
 }
