@@ -11,7 +11,7 @@
           </div>
         </div>
       </transition>
-      <div class="title-icon-back-wrapper" :class="{'hide-title': !titleVisible}">
+      <div class="title-icon-back-wrapper" :class="{'hide-title': !titleVisible}" @click="handleBack">
         <span class="icon-back icon"></span>
       </div>
       <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
@@ -70,7 +70,13 @@ export default {
       this.searchListVisible = false
     },
     showSearchList () {
+      this.hideTile()
       this.searchListVisible = true
+    },
+    handleBack () {
+      console.log('点击了返回')
+      this.showTitle()
+      this.hideSearchList()
     }
   }
 }
@@ -112,6 +118,7 @@ export default {
       position: absolute;
       left: px2rem(15);
       top: 0;
+      z-index: 200;
       height: px2rem(42);
       transition: height .2s linear;
       @include center;
