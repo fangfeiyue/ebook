@@ -14,6 +14,7 @@ import Scroll from '../../components/common/Scroll.vue'
 import SearchBar from '../../components/home/SearchBar.vue'
 import FlapCard from '../../components/home/FlapCard'
 import FooterGuide from '../../components/footer/Footer.vue'
+import { getHome } from '../../api/home'
 export default {
   mixins: [homeMixin],
   components: {
@@ -26,6 +27,16 @@ export default {
     return {
       list: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     }
+  },
+  mounted () {
+    getHome().then(res => {
+      if (res && res.status == 200) {
+        const data = res.data
+        const randomIndex = Math.floor(Math.random() * data.random.length)
+        this.randomBook = data.random[randomIndex]
+      }
+      console.log('res', res)
+    })
   },
   methods: {
     onScroll (offsetY) {
