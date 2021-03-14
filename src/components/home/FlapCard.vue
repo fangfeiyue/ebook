@@ -19,6 +19,8 @@ export default {
   mixins: [homeMixin],
   data () {
     return {
+      front: 0,
+      back: 1,
       interval: 100,
       flapCardList: [
         {
@@ -105,12 +107,31 @@ export default {
       // 设置背景颜色
       dom.style.backgroundColor = `rgb(${item.r} ,${item._g} ,${item.b})`
     },
+    flapCardRotate () {
+      // 正面半圆
+      const frontFlapCard = this.flapCardList[this.front]
+      // 背面半圆
+      const backFlapCard = this.flapCardList[this.back]
+      frontFlapCard.rotateDegree += 10
+      frontFlapCard._g -= 5
+      backFlapCard.rotateDegree -= 10
+      backFlapCard._g += 5
+      if (frontFlapCard.rotateDegree === 90 && backFlapCard.rotateDegree === 90) {
+        backFlapCard.zIndex += 2
+      }
+      this.rotate(this.front, 'front')
+      this.rotate(this.back, 'back')
+    },
+    prepare () {
+      // 让背面的左侧半圆和右侧半圆重叠起来
+      const backFlapCard = this.flapCardList[this.back]
+      backFlapCard.rotateDegree = 180
+      this.rotate(this.back, 'back')
+    },
     startFlapCardAnimation () {
+      this.prepare()
       this.timer = setInterval(() => {
-        const item = this.flapCardList[0]
-        item.rotateDegree += 10
-        item._g += 5
-        this.rotate(0, 'front')
+        this.flapCardRotate()
       }, this.interval)
     }
   },
