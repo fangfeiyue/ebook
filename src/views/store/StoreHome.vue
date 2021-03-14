@@ -1,9 +1,11 @@
 <template>
   <div class="store-home">
     <search-bar/>
-    <flap-card/>
+    <!-- <flap-card/> -->
     <scroll :top="94" @onScroll="onScroll">
-      <div v-for="(item, index) in list" :key="index">11111111111111111</div>
+      <div class="banner-wrapper">
+        <img :src="banner"/>
+      </div>
     </scroll>
     <footer-guide></footer-guide>
   </div>
@@ -12,7 +14,7 @@
 import { homeMixin } from '../../mixin/homeMixin'
 import Scroll from '../../components/common/Scroll.vue'
 import SearchBar from '../../components/home/SearchBar.vue'
-import FlapCard from '../../components/home/FlapCard'
+// import FlapCard from '../../components/home/FlapCard'
 import FooterGuide from '../../components/footer/Footer.vue'
 import { getHome } from '../../api/home'
 export default {
@@ -20,20 +22,21 @@ export default {
   components: {
     SearchBar,
     Scroll,
-    FlapCard,
+    // FlapCard,
     FooterGuide
   },
   data () {
     return {
-      list: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      banner: null
     }
   },
   mounted () {
     getHome().then(res => {
-      if (res && res.status == 200) {
+      if (res && res.status === 200) {
         const data = res.data
         const randomIndex = Math.floor(Math.random() * data.random.length)
         this.randomBook = data.random[randomIndex]
+        this.banner = data.banner
       }
       console.log('res', res)
     })
@@ -52,5 +55,14 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #fff;
+    .banner-wrapper {
+      width: 100%;
+      padding: px2rem(10);
+      box-sizing: border-box;
+      img {
+        width: 100%;
+        height: px2rem(150);
+      }
+    }
   }
 </style>
