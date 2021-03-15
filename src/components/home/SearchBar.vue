@@ -6,20 +6,14 @@
           <div class="title-text-wrapper">
             <span class="title-text title">书城</span>
           </div>
-          <div class="title-icon-shake-wrapper" @click="showFlapCard">
-            <span class="icon-shake icon"></span>
-          </div>
         </div>
       </transition>
-      <div class="title-icon-back-wrapper" :class="{'hide-title': !titleVisible}" @click="handleBack">
-        <span class="icon-back icon"></span>
-      </div>
       <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
-        <div class="search-bar-blank" :class="{'hide-title': !titleVisible}"></div>
         <div class="search-bar-input">
           <span class="icon-search icon"></span>
           <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText" @click="showSearchList">
         </div>
+        <div class="btn" v-show="cancelBtnVisible" @click="hideSearchList">取消</div>
       </div>
     </div>
     <hot-search-list v-show="searchListVisible" ref="searchList"/>
@@ -38,6 +32,7 @@ export default {
       searchText: '',
       titleVisible: true,
       shadowVisible: false,
+      cancelBtnVisible: false,
       searchListVisible: false
     }
   },
@@ -71,6 +66,7 @@ export default {
       this.shadowVisible = true
     },
     hideSearchList () {
+      this.cancelBtnVisible = false
       this.searchListVisible = false
       if (this.offsetY > 0) {
         this.hideTile()
@@ -84,6 +80,7 @@ export default {
       this.hideTile()
       this.hideShadow()
       this.searchListVisible = true
+      this.cancelBtnVisible = true
       this.$nextTick(() => {
         this.$refs.searchList.reset()
       })
@@ -156,18 +153,16 @@ export default {
       display: flex;
       padding: px2rem(10);
       box-sizing: border-box;
+      @include center;
       transition: top .2s linear;
       &.hide-title {
         top: 0;
       }
-      .search-bar-blank {
-        flex: 0 0 0;
-        width: 0;
-        transition: all .2s linear;
-        &.hide-title {
-          flex: 0 0 px2rem(31);
-          width: px2rem(31);
-        }
+      .btn {
+        font-size: px2rem(14);
+        color: #999;
+        box-sizing: border-box;
+        padding-left: px2rem(10);
       }
       .search-bar-input {
         width: 100%;

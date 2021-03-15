@@ -55,7 +55,7 @@ export default {
       flex: 1;
       text-align: right;
       font-weight: bold;
-      color: #409EFF;
+      color: #999;
     }
   }
   .hot-search-list {

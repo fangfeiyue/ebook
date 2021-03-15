@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="footer-item" v-for="tab in tabs" :key="tab.name" @click="gotoAddress(tab.path)">
-      <span class="icon" :class="tab.class"></span>
+      <span class="icon" :class="tab.class" :style="{color: $route.path.indexOf(tab.path) !== -1?'red':'black'}"></span>
       <span class="footer-item-desc" :style="{color: $route.path.indexOf(tab.path) !== -1?'red':'black'}">{{tab.name}}</span>
     </div>
   </div>

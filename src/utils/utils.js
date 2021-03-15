@@ -124,6 +124,14 @@ export function px2rem (px) {
   return px / ratio
 }
 
+export function saveSearchHistory (searchHistory) {
+  setLocalStorage('search-history', searchHistory)
+}
+
+export function getSearchHistory () {
+  return getLocalStorage('search-history') || []
+}
+
 export function getCategoryName (id) {
   switch (id) {
     case 1:
