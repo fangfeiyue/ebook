@@ -151,10 +151,13 @@ export default {
         })
 
         locations.forEach(item => {
-          const l = item.match(/\[(.*)\]!/)[1]
+          console.log('itemitemitem===>>', item)
+          let l = item.match(/\[(.*)\]!/)
+          l = l && l[1]
           this.navigation.forEach(nav => {
             if (nav.href) {
-              const href = nav.href.match(/^(.*)\.html$/)[1]
+              let href = nav.href.match(/^(.*)\.html$/)
+              href = href && href[1]
               if (href === l) {
                 nav.pageList.push(item)
               }

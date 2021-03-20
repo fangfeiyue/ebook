@@ -18,29 +18,18 @@
       </div>
     </div>
     <div class="slide-contents-book-wrapper" v-show="!searchVisible">
-      <!-- <div class="slide-contents-book-img-wrapper">
-        <img :src="cover" class="slide-contents-book-img">
-      </div> -->
       <div class="slide-contents-book-info-wrapper">
         <div class="slide-contents-book-title">
           <span class="slide-contents-book-title-text">{{metadata.title}}</span>
         </div>
-        <!-- <div class="slide-contents-book-author">
-          <span class="slide-contents-book-author-text">{{metadata.creator}}</span>
-        </div> -->
       </div>
       <div class="slide-contents-book-progress-wrapper">
-        <!-- <div class="slide-contents-book-progress">
-          <span class="progress">{{progress + '%'}}</span>
-          <span class="progress-text">已读</span>
-        </div> -->
         <div class="slide-contents-book-time">已读{{getReadTime()}}</div>
       </div>
     </div>
     <scroll class="slide-contents-list" :top="156" :bottom="48" ref="scroll" v-show="!searchVisible">
       <div class="slide-contents-item" v-for="(item, index) in navigation" :key="index" @click="jumpDirectory(item.href)">
         <span class="slide-contents-item-label" :style="contentItemStyle(item)" :class="{'selected': section === index}">{{item.label.trim()}}</span>
-        <!-- <span class="slide-contents-item-page">{{item.page}}</span> -->
       </div>
     </scroll>
     <scroll class="slide-search-list" :top="66" :bottom="48" ref="scroll" v-show="searchVisible">
