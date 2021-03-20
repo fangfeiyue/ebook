@@ -229,3 +229,16 @@ export function categoryText (category, vue) {
       return vue.$t('category.statistics')
   }
 }
+
+export function getLocalForage () {}
+
+export function getBookShelf () {}
+export function saveBookShelf () {}
+
+export function addToShelf () {}
+export function removeFromBookShelf () {}
+
+export function gotoBookDetail () {}
+export function appendAddToShelf () {}
+export function computeId () {}
+export function removeAddFromShelf () {}

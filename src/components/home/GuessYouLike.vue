@@ -57,6 +57,16 @@ export default {
     }
   },
   methods: {
+    showBookDetail (book) {
+      const { fileName, category } = book
+      this.$router.push({
+        path: '/store/detail',
+        query: {
+          category,
+          fileName
+        }
+      })
+    },
     change () {
       if (this.index + 1 >= this.total) {
         this.index = 0

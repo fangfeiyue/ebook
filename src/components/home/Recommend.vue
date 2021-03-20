@@ -26,6 +26,18 @@ export default {
   },
   props: {
     data: Array
+  },
+  methods: {
+    showBookDetail (book) {
+      const { fileName, category } = book
+      this.$router.push({
+        path: '/store/detail',
+        query: {
+          category,
+          fileName
+        }
+      })
+    }
   }
 }
 </script>

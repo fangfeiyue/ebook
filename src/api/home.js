@@ -7,3 +7,24 @@ export function getHome () {
     url: `${BASE_URL}/book/home`
   })
 }
+
+export function detail (book) {
+  return axios({
+    method: 'get',
+    url: `${BASE_URL}/book/detial`
+  })
+}
+
+export function list () {
+  return axios({
+    method: 'get',
+    url: `${BASE_URL}/book/list`
+  })
+}
+
+export function shelf () {
+  return axios({
+    method: 'get',
+    url: `${BASE_URL}/book/shelf`
+  })
+}

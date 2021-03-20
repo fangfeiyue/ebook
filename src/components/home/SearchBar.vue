@@ -1,101 +1,18 @@
 <template>
   <div>
-    <div class="search-bar" :class="{'hide-title': !titleVisible, 'hide-shadow': !shadowVisible}">
-      <transition name="title">
-        <div class="search-bar-title-wrapper" v-show="titleVisible">
-          <div class="title-text-wrapper">
-            <span class="title-text title">书城</span>
-          </div>
+    <div class="search-bar" >
+      <div class="search-bar-title-wrapper">
+        <div class="title-text-wrapper">
+          <span class="title-text title">书城</span>
         </div>
-      </transition>
-      <div class="search-bar-input-wrapper" :class="{'hide-title': !titleVisible}">
-        <div class="search-bar-input">
-          <span class="icon-search icon"></span>
-          <input type="text" class="input" placeholder="计算机科学和软件工程" v-model="searchText" @click="showSearchList">
-        </div>
-        <div class="btn" v-show="cancelBtnVisible" @click="hideSearchList">取消</div>
       </div>
     </div>
-    <hot-search-list v-show="searchListVisible" ref="searchList"/>
   </div>
 </template>
 <script>
 import { homeMixin } from '../../mixin/homeMixin'
-import HotSearchList from './HotSearchList.vue'
 export default {
-  components: {
-    HotSearchList
-  },
-  mixins: [homeMixin],
-  data () {
-    return {
-      searchText: '',
-      titleVisible: true,
-      shadowVisible: false,
-      cancelBtnVisible: false,
-      searchListVisible: false
-    }
-  },
-  watch: {
-    offsetY (offsetY) {
-      console.log(offsetY)
-      if (offsetY > 0) {
-        this.hideTile()
-        this.showShadow()
-      } else {
-        this.showTitle()
-        this.hideShadow()
-      }
-    },
-    hotSearchOffsetY (offsetY) {
-      console.log('hotSearch', offsetY)
-      offsetY > 0 ? this.showShadow() : this.hideShadow()
-    }
-  },
-  methods: {
-    hideTile () {
-      this.titleVisible = false
-    },
-    showTitle () {
-      this.titleVisible = true
-    },
-    hideShadow () {
-      this.shadowVisible = false
-    },
-    showShadow () {
-      this.shadowVisible = true
-    },
-    hideSearchList () {
-      this.cancelBtnVisible = false
-      this.searchListVisible = false
-      if (this.offsetY > 0) {
-        this.hideTile()
-        this.showShadow()
-      } else {
-        this.showTitle()
-        this.hideShadow()
-      }
-    },
-    showSearchList () {
-      this.hideTile()
-      this.hideShadow()
-      this.searchListVisible = true
-      this.cancelBtnVisible = true
-      this.$nextTick(() => {
-        this.$refs.searchList.reset()
-      })
-    },
-    handleBack () {
-      console.log('点击了返回')
-      this.showTitle()
-      this.hideSearchList()
-      this.offsetY > 0 ? this.showShadow() : this.hideShadow()
-    },
-    showFlapCard () {
-      console.log('showFlapCard ')
-      this.setFlapCardVisible(true)
-    }
-  }
+  mixins: [homeMixin]
 }
 </script>
 
@@ -104,7 +21,7 @@ export default {
   .search-bar {
     position: relative;
     width: 100%;
-    height: px2rem(94);
+    height: px2rem(52);
     box-shadow: 0 px2rem(2) px2rem(2) 0 rgba(0, 0, 0, .1);
     &.hide-title {
       height: px2rem(52);
