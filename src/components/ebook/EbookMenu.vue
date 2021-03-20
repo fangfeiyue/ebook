@@ -5,15 +5,19 @@
            v-show="menuVisible">
         <div class="icon-wrapper" :class="{'selected': settingVisible === 3}">
           <span class="icon-menu" @click="showSetting(3)"></span>
+          <span>目录</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 2}">
           <span class="icon-progress" @click="showSetting(2)"></span>
+          <span>进度</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 1}">
-          <span class="icon-bright" @click="showSetting(1)"></span>
+          <span class="icon-bright" @click="setTheme(3)"></span>
+          <span>日间</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 0}">
           <span class="icon-A" @click="showSetting(0)"></span>
+          <span>设置</span>
         </div>
       </div>
     </transition>
@@ -32,6 +36,7 @@ import EbookSettingFontPopup from './EbookSettingFontPopup'
 import EbookSettingTheme from './EbookSettingTheme'
 import EbookSettingProgress from './EbookSettingProgress'
 import EbookSlide from './EbookSlide'
+import { saveTheme } from '../../utils/utils'
 // import EbookSpeakingIcon from './EbookSpeakingIcon'
 export default {
   mixins: [ebookMixin],
@@ -46,6 +51,14 @@ export default {
   methods: {
     showSetting (key) {
       this.setSettingVisible(key)
+    },
+    setTheme (index) {
+      const theme = this.themeList[index]
+      this.setDefaultTheme(theme.name).then(() => {
+        this.setGlobalTheme()
+        this.currentBook.rendition.themes.select(theme.name)
+      })
+      saveTheme(this.fileName, theme.name)
     }
   }
 }
@@ -70,11 +83,15 @@ export default {
     .icon-wrapper {
       flex: 1;
       @include center;
+      flex-direction: column;
       .icon-progress {
         font-size: px2rem(24);
       }
       .icon-A {
         font-size: px2rem(20);
+      }
+      span:last-child {
+        font-size: px2rem(10);
       }
     }
   }

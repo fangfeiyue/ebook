@@ -8,8 +8,7 @@
         </div>
         <div class="progress-wrapper">
           <div class="progress-icon-wrapper" @click="prevSection()">
-            <span class="icon-back" @click="prevSection()"></span>
-            <!-- 上一章 -->
+            <span>上一章</span>
           </div>
           <input class="progress" type="range"
                  max="100"
@@ -21,8 +20,7 @@
                  :disabled="!bookAvailable"
                  ref="progress">
           <div class="progress-icon-wrapper" @click="nextSection()">
-            <span class="icon-forward"></span>
-            <!-- 下一章 -->
+            <span>下一章</span>
           </div>
         </div>
         <div class="text-wrapper">
@@ -140,6 +138,9 @@ export default {
           flex: 0 0 px2rem(22);
           font-size: px2rem(22);
           @include center;
+          span {
+            font-size: px2rem(10);
+          }
         }
       }
       .text-wrapper {

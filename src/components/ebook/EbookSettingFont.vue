@@ -29,6 +29,17 @@
           <span class="icon-forward"></span>
         </div>
       </div>
+      <div class="setting-theme">
+        <div class="setting-theme-item" v-for="(item, index) in themeList" :key="index"
+             @click="setTheme(index)">
+          <div class="preview"
+               :class="{'selected': item.name === defaultTheme}"
+               :style="{background: item.style.body.background}"></div>
+          <div class="text"
+               :class="{'selected': item.name === defaultTheme}">{{item.alias}}
+          </div>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -36,7 +47,7 @@
 <script>
 import { FONT_SIZE_LIST } from '../../config/config'
 import { ebookMixin } from '../../mixin/mixin'
-import { saveFontSize } from '../../utils/utils'
+import { saveFontSize, saveTheme } from '../../utils/utils'
 export default {
   mixins: [ebookMixin],
   data () {
@@ -78,6 +89,14 @@ export default {
         marginRight: (right + item - rightText) / 2 + 'px',
         fontSize: this.fontSizeList[this.fontSizeList.length - 1].fontSize
       }
+    },
+    setTheme (index) {
+      const theme = this.themeList[index]
+      this.setDefaultTheme(theme.name).then(() => {
+        this.setGlobalTheme()
+        this.currentBook.rendition.themes.select(theme.name)
+      })
+      saveTheme(this.fileName, theme.name)
     }
   }
 }
@@ -163,6 +182,32 @@ export default {
       }
       .setting-font-family-icon-wrapper {
         @include center;
+      }
+    }
+    .setting-theme {
+      height: 100%;
+      display: flex;
+      .setting-theme-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: px2rem(5);
+        box-sizing: border-box;
+        .preview {
+          flex: 1;
+          border: px2rem(1) solid #ccc;
+          box-sizing: border-box;
+          border: none;
+          &.selected {
+            box-shadow: 0 px2rem(4) px2rem(6) 0 rgba(0, 0, 0, .1);
+            border: px2rem(2) solid #5e6369;
+          }
+        }
+        .text {
+          flex: 0 0 px2rem(20);
+          font-size: px2rem(14);
+          @include center;
+        }
       }
     }
   }
