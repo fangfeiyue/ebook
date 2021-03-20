@@ -2,10 +2,10 @@
   <transition name="slide-up">
     <div class="setting-wrapper" v-show="menuVisible && settingVisible === 2">
       <div class="setting-progress">
-        <div class="read-time-wrapper">
-          <span class="read-time-text">您已阅读{{readingTime}}</span>
-          <span class="icon-forward"></span>
-        </div>
+        <!-- <div class="text-wrapper">
+          <span class="progress-section-text">{{sectionName}}</span>
+          <span class="progress-text">({{bookAvailable ? progress + '%' : $t('book.loading')}})</span>
+        </div> -->
         <div class="progress-wrapper">
           <div class="progress-icon-wrapper" @click="prevSection()">
             <span>上一章</span>
@@ -22,10 +22,6 @@
           <div class="progress-icon-wrapper" @click="nextSection()">
             <span>下一章</span>
           </div>
-        </div>
-        <div class="text-wrapper">
-          <span class="progress-section-text">{{sectionName}}</span>
-          <span class="progress-text">({{bookAvailable ? progress + '%' : $t('book.loading')}})</span>
         </div>
       </div>
     </div>
@@ -96,6 +92,9 @@ export default {
     width: 100%;
     height: px2rem(90);
     box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     .setting-progress {
       position: relative;
       width: 100%;
@@ -139,14 +138,15 @@ export default {
           font-size: px2rem(22);
           @include center;
           span {
-            font-size: px2rem(10);
+            font-size: px2rem(12);
+            width: px2rem(40);
           }
         }
       }
       .text-wrapper {
-        position: absolute;
-        left: 0;
-        bottom: px2rem(5);
+        // position: absolute;
+        // left: 0;
+        // bottom: px2rem(5);
         width: 100%;
         font-size: px2rem(12);
         text-align: center;

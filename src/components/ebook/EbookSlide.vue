@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="empty" v-else>
-            <ebook-loading></ebook-loading>
+            目录加载中。。。
           </div>
         </div>
       </transition>
@@ -31,16 +31,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-import EbookLoading from './EbookLoading'
 import EbookContent from './EbookSlideContent'
 import EbookBookmark from './EbookSlideBookmark'
 import { ebookMixin } from '../../mixin/mixin'
 
 export default {
   mixins: [ebookMixin],
-  components: {
-    EbookLoading
-  },
   data () {
     return {
       tab: 1,
@@ -95,8 +91,8 @@ export default {
         width: 100%;
         height: 100%;
         @include center;
-        font-size: px2rem(16);
-        color: #333;
+        font-size: px2rem(14);
+        color: #f0f0f0;
       }
     }
     .content-bg {

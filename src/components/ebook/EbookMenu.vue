@@ -12,7 +12,7 @@
           <span>进度</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 1}">
-          <span class="icon-bright" @click="setTheme(3)"></span>
+          <span class="icon-private" @click="setTheme(3)"></span>
           <span>护眼</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 0}">

@@ -23,7 +23,7 @@ import {
   saveBookmark
 } from '../../utils/utils'
 
-const BLUE = '#346cbc'
+const RED = '#cc554f'
 const WHITE = '#fff'
 export default {
   mixins: [ebookMixin],
@@ -60,7 +60,7 @@ export default {
     },
     isBookmark (isBookmark) {
       this.isFixed = isBookmark
-      this.color = isBookmark ? BLUE : WHITE
+      this.color = isBookmark ? RED : WHITE
     }
   },
   data () {
@@ -89,7 +89,7 @@ export default {
     beforeHight () {
       if (this.isBookmark) {
         this.text = '下拉删除书签'
-        this.color = BLUE
+        this.color = RED
         this.isFixed = true
       } else {
         this.text = '下拉添加书签'
@@ -114,7 +114,7 @@ export default {
         this.isFixed = false
       } else {
         this.text = '松手添加书签'
-        this.color = BLUE
+        this.color = RED
         this.isFixed = true
       }
 

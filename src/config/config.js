@@ -44,24 +44,23 @@ export function themeList (vue) {
         }
       }
     }, {
-      alias: '护眼',
-      name: 'Eye',
-      style: {
-        body: {
-          color: '#404c42',
-          background: '#a9c1a9',
-          'padding-top': `${realPx(48)}px!important`,
-          'padding-bottom': `${realPx(48)}px!important`
-        }
-      }
-    },
-    {
       alias: '夜间',
       name: 'Night',
       style: {
         body: {
           color: '#cecece',
           background: '#000000',
+          'padding-top': `${realPx(48)}px!important`,
+          'padding-bottom': `${realPx(48)}px!important`
+        }
+      }
+    }, {
+      alias: '护眼',
+      name: 'Eye',
+      style: {
+        body: {
+          color: '#404c42',
+          background: '#a9c1a9',
           'padding-top': `${realPx(48)}px!important`,
           'padding-bottom': `${realPx(48)}px!important`
         }

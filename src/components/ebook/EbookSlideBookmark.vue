@@ -1,84 +1,102 @@
 <template>
   <div class="ebook-slide-bookmark">
-    <div class="slide-bookmark-title">书签 · {{bookmark ? bookmark.length : 0}}</div>
+    <div class="slide-bookmark-title">书签</div>
     <scroll class="slide-bookmark-list" :top="48" :bottom="48">
-      <div class="slide-bookmark-item" v-for="(item, index) in bookmark" :key="index" @click="displayBookmark(item.cfi)">
-        <div class="slide-bookmark-item-icon">
-          <div class="icon-bookmark"></div>
+      <block v-if="bookmark && bookmark.length">
+        <div
+          class="slide-bookmark-item"
+          v-for="(item, index) in bookmark"
+          :key="index"
+          @click="displayBookmark(item.cfi)"
+        >
+          <div class="slide-bookmark-item-icon">
+            <div class="icon-bookmark"></div>
+          </div>
+          <div class="slide-bookmark-item-text">{{ item.text }}</div>
         </div>
-        <div class="slide-bookmark-item-text">{{item.text}}</div>
+      </block>
+      <div v-else class="slide-bookmark-tip slide-bookmark-title">
+        本书暂无书签
       </div>
     </scroll>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Scroll from '../common/Scroll'
-import { ebookMixin } from '../../mixin/mixin'
-import { getBookmark } from '../../utils/utils'
+import Scroll from "../common/Scroll";
+import { ebookMixin } from "../../mixin/mixin";
+import { getBookmark } from "../../utils/utils";
 
 export default {
   mixins: [ebookMixin],
   components: {
-    Scroll
+    Scroll,
   },
-  data () {
+  data() {
     return {
-      bookmark: null
-    }
+      bookmark: null,
+    };
   },
   methods: {
-    displayBookmark (target) {
-      this.displayBook(target, this.hide)
-    }
+    displayBookmark(target) {
+      this.displayBook(target, this.hide);
+    },
   },
-  mounted () {
-    this.bookmark = getBookmark(this.fileName)
-    console.log('bookmark', this.bookmark)
-  }
-}
+  mounted() {
+    this.bookmark = getBookmark(this.fileName);
+    console.log("bookmark", this.bookmark);
+  },
+};
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import "../../assets/styles/global";
+@import "../../assets/styles/global";
 
-  .ebook-slide-bookmark {
+.ebook-slide-bookmark {
+  width: 100%;
+  .slide-bookmark-title {
     width: 100%;
-    .slide-bookmark-title {
-      width: 100%;
-      height: px2rem(48);
-      font-size: px2rem(14);
-      font-weight: bold;
-      padding: 0 px2rem(15);
+    height: px2rem(48);
+    font-size: px2rem(14);
+    font-weight: bold;
+    padding: 0 px2rem(15);
+    box-sizing: border-box;
+    @include left;
+  }
+  .slide-bookmark-list {
+    padding: 0 px2rem(15);
+    box-sizing: border-box;
+    .slide-bookmark-item {
+      display: flex;
+      padding: px2rem(15) 0;
       box-sizing: border-box;
-      @include left;
-    }
-    .slide-bookmark-list {
-      padding: 0 px2rem(15);
-      box-sizing: border-box;
-      .slide-bookmark-item {
-        display: flex;
-        padding: px2rem(15) 0;
-        box-sizing: border-box;
-        .slide-bookmark-item-icon {
-          flex: 0 0 px2rem(29);
-          @include left;
-          .icon-bookmark {
-            width: px2rem(20);
-            height: px2rem(20);
-            font-size: px2rem(12);
-            border-radius: 50%;
-            background: #bbb;
-            @include center;
-          }
-        }
-        .slide-bookmark-item-text {
-          font-size: px2rem(14);
-          line-height: px2rem(15);
-          max-height: px2rem(45);
-          @include ellipsis2(3);
+      .slide-bookmark-item-icon {
+        flex: 0 0 px2rem(29);
+        @include left;
+        .icon-bookmark {
+          width: px2rem(20);
+          height: px2rem(20);
+          font-size: px2rem(12);
+          border-radius: 50%;
+          background: #bbb;
+          @include center;
         }
       }
+      .slide-bookmark-item-text {
+        font-size: px2rem(14);
+        line-height: px2rem(15);
+        max-height: px2rem(45);
+        @include ellipsis2(3);
+      }
+    }
+    .slide-bookmark-tip {
+      width:100%;
+      height:100%;
+      @include columnCenter;
+      text-align:center;
+      color: #fcfcfc;
+      font-size: px2rem(15);
     }
   }
+}
 </style>
