@@ -120,8 +120,6 @@ export default {
       this.reader = this.book.renderTo('reader', {
         width: innerWidth,
         height: innerHeight
-        // method: 'default'
-        // flow: 'scrolled' // 微信端和苹果手机暂不支持
       })
       const location = getLocation(this.fileName)
       this.displayBook(location, () => {
@@ -181,6 +179,8 @@ export default {
     initEpub () {
       const url = process.env.VUE_APP_BASE_URL + '/epub/' + this.fileName + '.epub'
       this.book = new Epub(url)
+      console.log("🚀 ~ file: EbookReader.vue ~ line 182 ~ initEpub ~ this.book", this.book)
+      
       this.setCurrentBook(this.book)
       this.initRender()
       this.initGestrue()
