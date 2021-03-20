@@ -13,7 +13,7 @@
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 1}">
           <span class="icon-bright" @click="setTheme(3)"></span>
-          <span>日间</span>
+          <span>护眼</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 0}">
           <span class="icon-A" @click="showSetting(0)"></span>
