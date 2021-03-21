@@ -2,19 +2,19 @@
   <div class="ebook-slide-bookmark">
     <div class="slide-bookmark-title">书签</div>
     <scroll class="slide-bookmark-list" :top="48" :bottom="48">
-      <block v-if="bookmark && bookmark.length">
+      <div v-if="bookmark && bookmark.length">
         <div
           class="slide-bookmark-item"
           v-for="(item, index) in bookmark"
           :key="index"
           @click="displayBookmark(item.cfi)"
         >
-          <div class="slide-bookmark-item-icon">
-            <div class="icon-bookmark"></div>
-          </div>
           <div class="slide-bookmark-item-text">{{ item.text }}</div>
+          <div class="slide-bookmark-item-icon">
+            <span>{{ item.time }}</span>
+          </div>
         </div>
-      </block>
+      </div>
       <div v-else class="slide-bookmark-tip slide-bookmark-title">
         本书暂无书签
       </div>
@@ -68,25 +68,20 @@ export default {
     box-sizing: border-box;
     .slide-bookmark-item {
       display: flex;
+      flex-direction: column;
       padding: px2rem(15) 0;
       box-sizing: border-box;
       .slide-bookmark-item-icon {
         flex: 0 0 px2rem(29);
         @include left;
-        .icon-bookmark {
-          width: px2rem(20);
-          height: px2rem(20);
-          font-size: px2rem(12);
-          border-radius: 50%;
-          background: #bbb;
-          @include center;
-        }
+        font-size: px2rem(13);
+        color: #8c8c8c;
       }
       .slide-bookmark-item-text {
         font-size: px2rem(14);
         line-height: px2rem(15);
         max-height: px2rem(45);
-        @include ellipsis2(3);
+        @include ellipsis2(1);
       }
     }
     .slide-bookmark-tip {

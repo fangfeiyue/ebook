@@ -22,10 +22,13 @@
         <div class="slide-contents-book-title">
           <span class="slide-contents-book-title-text">{{metadata.title}}</span>
         </div>
+        <div class="slide-contents-time">
+          <span class="slide-contents-time-text">您已阅读{{getReadTime()}}</span>
+        </div>
       </div>
-      <div class="slide-contents-book-progress-wrapper">
+      <!-- <div class="slide-contents-book-progress-wrapper">
         <div class="slide-contents-book-time">已读{{getReadTime()}}</div>
-      </div>
+      </div> -->
     </div>
     <scroll class="slide-contents-list" :top="156" :bottom="48" ref="scroll" v-show="!searchVisible">
       <div class="slide-contents-item" v-for="(item, index) in navigation" :key="index" @click="jumpDirectory(item.href)">
@@ -168,14 +171,14 @@ export default {
             @include ellipsis2(1);
           }
         }
-        .slide-contents-book-author {
+        .slide-contents-time {
           font-size: px2rem(12);
           line-height: px2rem(14);
-          padding: 0 px2rem(10);
+          padding: px2rem(10);
           box-sizing: border-box;
           margin-top: px2rem(5);
           @include left;
-          .slide-contents-book-author-text {
+          .slide-contents-time-text {
             @include ellipsis2(1);
           }
         }

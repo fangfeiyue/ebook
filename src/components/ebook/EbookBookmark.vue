@@ -19,6 +19,7 @@ import BookMark from './Bookmark'
 import { ebookMixin } from '../../mixin/mixin'
 import {
   realPx,
+  dateFormat,
   getBookmark,
   saveBookmark
 } from '../../utils/utils'
@@ -149,7 +150,8 @@ export default {
           // 用于判断当前页是不是书签页
           cfi: cur.start.cfi,
           // 用于显示文本
-          text
+          text,
+          time: dateFormat('YYYY-mm-dd HH:MM:SS', new Date())
         })
         saveBookmark(this.fileName, this.bookmark)
       })
