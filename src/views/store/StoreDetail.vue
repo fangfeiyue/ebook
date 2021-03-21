@@ -63,11 +63,11 @@
       </div>
     </scroll>
     <div class="bottom-wrapper">
-      <div class="bottom-btn" @click.stop.prevent="readBook()">
+      <div class="bottom-btn" @click.stop.prevent="showBookShelf()">
         <span class="icon-shelf icon"></span>
         <span>书架</span>
       </div>
-      <div class="bottom-btn read" @click.stop.prevent="trialListening()">
+      <div class="bottom-btn read" @click.stop.prevent="readBook()">
         <span class="icon-book icon"></span>
         <span>阅读</span>
       </div>
@@ -184,6 +184,9 @@ export default {
         addToShelf(this.bookItem)
         this.setShelfList(getBookShelf())
       }
+    },
+    showBookShelf () {
+      this.$router.push('/bookshelf')
     },
     // 展示Toast弹窗
     showToast (text) {

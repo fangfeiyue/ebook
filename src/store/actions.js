@@ -14,6 +14,9 @@ const actions = {
   setDefaultFontFamily ({ commit }, font) {
     return commit('setDefaultFontFamily', font)
   },
+  setShelfList({ commit }, list) {
+    return commit('setShelfList', list)
+  },
   setFontFamilyVisible ({ commit }, visible) {
     return commit('setFontFamilyVisible', visible)
   },

@@ -24,9 +24,6 @@ export default {
     }
   },
   methods: {
-    showBookShelf () {
-      this.$router.push('/store/shelf')
-    },
     showShadow () {
       this.ifHideShadow = false
     },
@@ -56,7 +53,7 @@ export default {
     .title-left-wrapper {
       position: relative;
       z-index: 200;
-      flex: 1;
+      width: 20%;
       margin-left: px2rem(15);
       @include left;
     }
