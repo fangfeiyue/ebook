@@ -63,10 +63,16 @@
       </div>
     </scroll>
     <div class="bottom-wrapper">
-      <div class="bottom-btn" @click.stop.prevent="readBook()">书架</div>
-      <div class="bottom-btn" @click.stop.prevent="trialListening()">阅读</div>
+      <div class="bottom-btn" @click.stop.prevent="readBook()">
+        <span class="icon-shelf icon"></span>
+        <span>书架</span>
+      </div>
+      <div class="bottom-btn read" @click.stop.prevent="trialListening()">
+        <span class="icon-book icon"></span>
+        <span>阅读</span>
+      </div>
       <div class="bottom-btn" @click.stop.prevent="addOrRemoveShelf()">
-        <span class="icon-check" v-if="inBookShelf"></span>
+        <span class="icon-book2 icon"></span>
         {{inBookShelf ? 加入书架 : $t('detail.addOrRemoveShelf')}}
       </div>
     </div>
@@ -435,15 +441,22 @@ export default {
       box-shadow: 0 px2rem(-2) px2rem(2) rgba(0, 0, 0, .1);
       .bottom-btn {
         flex: 1;
-        color: $color-blue;
-        font-weight: bold;
+        color: #000;
         font-size: px2rem(14);
-        @include center;
-        &:active {
-          color: $color-blue-transparent;
-        }
+        @include columnCenter;
+        font-weight: 500;
         .icon-check {
           margin-right: px2rem(5);
+        }
+      }
+      .icon {
+        font-size: px2rem(16);
+        margin-bottom: px2rem(4);
+      }
+      .read {
+        background-color: #ca5651;
+        span {
+          color: #fff;
         }
       }
       &.hide-shadow {

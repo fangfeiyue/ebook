@@ -1,5 +1,6 @@
 import axios from 'axios'
 const BASE_URL = process.env.VUE_APP_BASE_URL
+const BOOK_URL = process.env.VUE_APP_BOOK_URL
 
 export function getHome () {
   return axios({
@@ -11,7 +12,10 @@ export function getHome () {
 export function detail (book) {
   return axios({
     method: 'get',
-    url: `${BASE_URL}/book/detial`
+    url: `${BOOK_URL}/book/detial`,
+    params: {
+      fileName: book.fileName
+    }
   })
 }
 

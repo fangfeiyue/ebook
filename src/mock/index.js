@@ -6,5 +6,5 @@ import BookHomeApi from './bookHome'
 // 第三个参数：返回数据
 // */
 // console.log('Mock', Mock)
-// Mock.mock(/\/book\/home/, 'get', BookHomeApi)
+Mock.mock(/\/book\/home/, 'get', BookHomeApi)
 export default Mock
