@@ -1,7 +1,7 @@
 <template>
   <div class="home-title-wrapper">
     <div class="label">{{label}}</div>
-    <div class="btn" @click="click">{{btn}} ></div>
+    <!-- <div class="btn" @click="click">{{btn}} ></div> -->
   </div>
 </template>
 

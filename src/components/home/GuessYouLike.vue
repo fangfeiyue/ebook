@@ -1,6 +1,6 @@
 <template>
   <div class="guess-you-like">
-    <title-view :label="$t('home.guessYouLike')" :btn="$t('home.change')" @onClick="change"></title-view>
+    <title-view label="本期主打"></title-view>
     <div class="guess-you-like-list">
       <div class="guess-you-like-item" v-for="(item, index) in showData" :key="index" @click="showBookDetail(item)">
         <div class="img-wrapper">

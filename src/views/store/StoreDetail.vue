@@ -13,7 +13,7 @@
                  :title="title"
                  :author="author"
                  :desc="desc"></book-info>
-      <div class="book-detail-content-wrapper">
+      <!-- <div class="book-detail-content-wrapper">
         <div class="book-detail-content-title">{{$t('detail.copyright')}}</div>
         <div class="book-detail-content-list-wrapper">
           <div class="book-detail-content-row">
@@ -33,6 +33,15 @@
             <div class="book-detail-content-text">{{isbn}}</div>
           </div>
         </div>
+      </div> -->
+      <div class="book-detail-content-wrapper">
+        <div class="book-detail-content-title">{{$t('detail.trial')}}</div>
+        <div class="book-detail-content-list-wrapper">
+          <div class="loading-text-wrapper" v-if="!this.displayed">
+            <span class="loading-text">{{$t('detail.loading')}}</span>
+          </div>
+        </div>
+        <div id="preview" v-show="this.displayed" ref="preview"></div>
       </div>
       <div class="book-detail-content-wrapper">
         <div class="book-detail-content-title">{{$t('detail.navigation')}}</div>
@@ -52,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="book-detail-content-wrapper">
+      <!-- <div class="book-detail-content-wrapper">
         <div class="book-detail-content-title">{{$t('detail.trial')}}</div>
         <div class="book-detail-content-list-wrapper">
           <div class="loading-text-wrapper" v-if="!this.displayed">
@@ -60,7 +69,7 @@
           </div>
         </div>
         <div id="preview" v-show="this.displayed" ref="preview"></div>
-      </div>
+      </div> -->
     </scroll>
     <div class="bottom-wrapper">
       <div class="bottom-btn" @click.stop.prevent="showBookShelf()">
@@ -73,7 +82,7 @@
       </div>
       <div class="bottom-btn" @click.stop.prevent="addOrRemoveShelf()">
         <span class="icon-book2 icon"></span>
-        {{inBookShelf ? 加入书架 : $t('detail.addOrRemoveShelf')}}
+        {{inBookShelf ? '加入书架' : '已加入书架'}}
       </div>
     </div>
     <toast :text="toastText" ref="toast"></toast>
@@ -139,6 +148,7 @@ export default {
     },
     // 判断当前的电子书是否存在于书架
     inBookShelf () {
+      console.log('dddddd')
       if (this.bookItem && this.shelfList) {
         // 定义一个自执行函数，将书架转为一维数组结构，并且只保留type为1的数据（type=1的为电子书）
         const flatShelf = (function flatten (arr) {
@@ -172,6 +182,7 @@ export default {
   },
   methods: {
     addOrRemoveShelf () {
+      console.log('加入书架', this.inBookShelf, this.bookItem, getBookShelf())
       // 如果电子书存在于书架，则从书架中移除电子书
       if (this.inBookShelf) {
         this.setShelfList(removeFromBookShelf(this.bookItem))

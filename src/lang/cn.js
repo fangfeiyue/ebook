@@ -2,7 +2,7 @@ const messages = {
   home: {
     title: '书城',
     hint: '计算机科学和软件工程',
-    guessYouLike: '猜你喜欢',
+    guessYouLike: '热门严选',
     change: '换一批',
     clear: '清空',
     hotSearch: '热门搜索',
@@ -10,7 +10,7 @@ const messages = {
     sameAuthor: '与$1同作者',
     sameReader: '对$1感兴趣的人也在读',
     readPercent: '阅读$2的人，$1都在读',
-    recommend: '热门推荐',
+    recommend: '小编推荐',
     seeAll: '查看全部',
     readers: '$1人同时在读',
     featured: '精选',

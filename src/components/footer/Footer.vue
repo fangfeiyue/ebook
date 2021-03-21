@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     gotoAddress (path) {
+      console.log('点击了页面', path)
       this.$router.push(path)
     }
   }

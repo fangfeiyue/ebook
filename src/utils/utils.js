@@ -230,18 +230,64 @@ export function categoryText (category, vue) {
   }
 }
 
-export function getLocalForage () {}
+export function getBookShelf () {
+  return getLocalStorage('shelf')
+}
+export function saveBookShelf (shelf) {
+  return setLocalStorage('shelf', shelf)
+}
 
-export function getBookShelf () {}
-export function saveBookShelf () {}
+export function addToShelf (book) {
+  let shelfList = getBookShelf()
+  shelfList = removeAddFromShelf(shelfList)
+  book.type = 1
+  shelfList.push(book)
+  shelfList = computeId(shelfList)
+  shelfList = appendAddToShelf(shelfList)
+  saveBookShelf(shelfList)
+}
+export function removeFromBookShelf (book) {
+  return getBookShelf().filter(item => {
+    if (item.itemList) {
+      item.itemList = removeAddFromShelf(item.itemList)
+    }
+    return item.fileName !== book.fileName
+  })
+}
 
-export function addToShelf () {}
-export function removeFromBookShelf () {}
+export function gotoBookDetail(vue, book) {
+  vue.$router.push({
+    path: '/store/detail',
+    query: {
+      fileName: book.fileName,
+      category: book.categoryText
+    }
+  })
+}
 
-export function gotoBookDetail () {}
-export function appendAddToShelf () {}
-export function computeId () {}
-export function removeAddFromShelf () {}
+export function appendAddToShelf (list) {
+  list.push({
+    id: -1,
+    type: 3
+  })
+  return list
+}
+
+export function computeId (list) {
+  return list.map((book, index) => {
+    if (book.type !== 3) {
+      book.id = index + 1
+      if (book.itemList) {
+        book.itemList = computeId(book.itemList)
+      }
+    }
+    return book
+  })
+}
+
+export function removeAddFromShelf (list) {
+  return list.filter(item => item.type !== 3)
+}
 
 export function dateFormat(fmt, date) {
   let ret;

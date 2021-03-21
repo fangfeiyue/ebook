@@ -1,8 +1,5 @@
 <template>
   <div class="cover-title-wrapper">
-    <div class="cover-title-left-wrapper">
-      <img class="cover-img" :src="cover">
-    </div>
     <div class="cover-title-right-wrapper">
       <div class="detail-cover-title-wrapper">
         <div class="cover-title-text">{{title}}</div>
@@ -13,6 +10,9 @@
       <div class="detail-cover-description-wrapper">
         <div class="detail-cover-description-text">{{desc}}</div>
       </div>
+    </div>
+    <div class="cover-title-left-wrapper">
+      <img class="cover-img" :src="cover">
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     box-sizing: border-box;
     .cover-title-left-wrapper {
       flex: 0 0 px2rem(103);
-      padding: px2rem(10) 0 px2rem(10) px2rem(15);
+      padding: px2rem(10) px2rem(15) px2rem(10) 0;
       box-sizing: border-box;
       @include top;
       .cover-img {

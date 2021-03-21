@@ -14,6 +14,21 @@ const actions = {
   setDefaultFontFamily ({ commit }, font) {
     return commit('setDefaultFontFamily', font)
   },
+  setIsEditMode({ commit }, isEditMode) {
+    return commit('setIsEditMode', isEditMode)
+  },
+  setShelfSelected({ commit }, selected) {
+    return commit('setShelfSelected', selected)
+  },
+  setShelfTitleVisible({ commit }, visible) {
+    return commit('setShelfTitleVisible', visible)
+  },
+  setShelfCategory({ commit }, category) {
+    return commit('setShelfCategory', category)
+  },
+  setCurrentType({ commit }, type) {
+    return commit('setCurrentType', type)
+  },
   setShelfList({ commit }, list) {
     return commit('setShelfList', list)
   },
