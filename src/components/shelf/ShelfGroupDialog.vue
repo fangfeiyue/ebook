@@ -61,7 +61,7 @@
       defaultCategory() {
         return [
           {
-            title: this.$t('shelf.newGroup'),
+            title: '新建分类',
             edit: 1
           },
           {
@@ -77,7 +77,7 @@
         return [...this.defaultCategory, ...this.category]
       },
       title() {
-        return !this.ifNewGroup ? this.$t('shelf.moveBook') : this.$t('shelf.newGroup')
+        return !this.ifNewGroup ? '移动至...' : '新建分组'
       }
     },
     data() {
@@ -179,7 +179,7 @@
       box-sizing: border-box;
       color: #666;
       &.is-add {
-        color: $color-blue;
+        color: #000;
         &:active {
           color: $color-blue-transparent;
         }

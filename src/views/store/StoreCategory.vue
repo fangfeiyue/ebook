@@ -42,8 +42,9 @@
       // 如果是编辑模式，滚动条需要距底部48像素（需要换算成实际px，组件负责运算）
       this.scrollBottom = isEditMode ? 48 : 0
       this.$nextTick(() => {
+        console.log('刷新')
         // 刷新滚动条，使得设置生效
-        this.$refs.scroll.refresh()
+        // this.$refs.scroll.refresh()
       })
     }
   },

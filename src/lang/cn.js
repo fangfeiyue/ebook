@@ -79,7 +79,7 @@ const messages = {
     haveSelectedBook: '已选择$1本',
     haveSelectedBooks: '已选择$1本',
     moveBook: '移动书籍',
-    newGroup: '新建分组',
+    newGroup: '新建分组1',
     groupOut: '移出分组',
     editGroup: '修改分组',
     editGroupName: '修改分组名',

@@ -122,7 +122,7 @@
         this.hidePopup()
         setTimeout(() => {
           this.popupMenu = this.popup({
-            title: this.$t('shelf.deleteGroupTitle'),
+            title: '确定删除该分组吗？',
             btn: [
               this.createPopupBtn(this.$t('shelf.confirm'), () => {
                 this.deleteGroup()
@@ -140,8 +140,7 @@
             }),
             this.createPopupBtn(this.$t('shelf.deleteGroup'), () => {
               this.showDeleteGroup()
-            }, 'danger'),
-            this.popupCancelBtn
+            })
           ]
         }).show()
       },
@@ -169,6 +168,7 @@
         this.setShelfList([])
         this.setShelfSelected([])
         this.getShelfList()
+        this.setIsEditMode(false)
         this.simpleToast(this.$t('shelf.clearCacheSuccess'))
       }
     }

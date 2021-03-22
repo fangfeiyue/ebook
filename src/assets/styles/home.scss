@@ -27,11 +27,11 @@ $text-tiny-max-height: px2rem(12);
   font-size: $text-big;
   max-height: $text-big-max-height2;
   color: #444;
-  font-weight: bold;
+  font-weight: bold !important;
   @include ellipsis2(3);
 }
 .title-medium {
-  font-size: $text-medium;
+  font-size: $text-medium !important;
   line-height: $text-medium-lh;
   max-height: $text-medium-max-height2;
   color: #444;
@@ -48,7 +48,7 @@ $text-tiny-max-height: px2rem(12);
 }
 .sub-title-medium {
   line-height: $text-medium-lh;
-  font-size: $text-medium;
+  font-size: $text-medium !important;
   max-height: $text-medium-max-height2;
   color: #666;
   @include ellipsis2(2);

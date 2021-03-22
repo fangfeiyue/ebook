@@ -37,7 +37,8 @@ export default {
   },
   methods: {
     onItemClick() {
-      if (this.isEditMode) {
+      // if (this.isEditMode && (this.data.type == 2 || this.data.type == 3)) return
+      if (this.isEditMode && this.data.type == 1) {
         this.data.selected = !this.data.selected
         if (this.data.selected) {
           this.shelfSelected.pushWithoutDuplicate(this.data)
@@ -47,14 +48,15 @@ export default {
       } else {
         if (this.data.type === 1) {
           this.showBookDetail(this.data)
-        } else if (this.data.type === 2) {
+        } else if (!this.isEditMode && this.data.type === 2) {
           this.$router.push({
             path: '/store/category',
             query: {
               title: this.data.title
             }
           })
-        } else {
+        } else if (this.data.type === 3){
+          this.setIsEditMode(false)
           this.$router.push({
             path: '/store/home'
           })
