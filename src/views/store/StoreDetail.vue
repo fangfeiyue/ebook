@@ -35,7 +35,7 @@
         </div>
       </div> -->
       <div class="book-detail-content-wrapper">
-        <div class="book-detail-content-title">{{$t('detail.trial')}}</div>
+        <div class="book-detail-content-title">试读</div>
         <div class="book-detail-content-list-wrapper">
           <div class="loading-text-wrapper" v-if="!this.displayed">
             <span class="loading-text">{{$t('detail.loading')}}</span>
@@ -82,7 +82,7 @@
       </div>
       <div class="bottom-btn" @click.stop.prevent="addOrRemoveShelf()">
         <span class="icon-book2 icon"></span>
-        {{inBookShelf ? '加入书架' : '已加入书架'}}
+        {{inBookShelf ? '已加入书架' : '加入书架'}}
       </div>
     </div>
     <toast :text="toastText" ref="toast"></toast>
@@ -148,7 +148,6 @@ export default {
     },
     // 判断当前的电子书是否存在于书架
     inBookShelf () {
-      console.log('dddddd')
       if (this.bookItem && this.shelfList) {
         // 定义一个自执行函数，将书架转为一维数组结构，并且只保留type为1的数据（type=1的为电子书）
         const flatShelf = (function flatten (arr) {
@@ -322,6 +321,7 @@ export default {
             }
             // 根据rootFile拼接出opf文件路径
             this.opf = `${process.env.VUE_APP_EPUB_OPF_URL}/${this.fileName}/${rootFile}`
+            console.log("🚀 ~ file: StoreDetail.vue ~ line 325 ~ init ~ this.opf", this.opf)
             // 解析电子书
             this.parseBook(this.opf)
           } else {

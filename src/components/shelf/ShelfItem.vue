@@ -85,10 +85,10 @@ export default {
       position: absolute;
       bottom: px2rem(2);
       right: px2rem(2);
-      font-size: px2rem(18);
+      font-size: px2rem(20);
       color: rgba(0, 0, 0, .4);
       &.is-selected {
-        color: $color-blue;
+        color: red;
       }
     }
   }

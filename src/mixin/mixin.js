@@ -123,8 +123,8 @@ export const ebookMixin = {
       this.setFontFamilyVisible(false)
     },
     getReadTime () {
-      const time = getReadTime(this.fileName)
-      return time ? this.formatTime(Math.ceil(time / 60)) : 0
+      const time = getReadTime(this.fileName) || 0
+      return this.formatTime(Math.ceil(time / 60))
     },
     formatTime (time) {
       if (time < 60) return time + '分钟'

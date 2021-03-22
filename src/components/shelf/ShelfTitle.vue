@@ -9,8 +9,8 @@
         <span class="shelf-title-btn-text" @click="clearCache">{{$t('shelf.clearCache')}}</span>
       </div>
       <div class="shelf-title-btn-wrapper shelf-title-right" v-if="showEdit">
-        <span class="shelf-title-btn-text"
-              @click="onEditClick">{{isEditMode ? $t('shelf.cancel') : $t('shelf.edit')}}</span>
+        <span :style="{display:(isCanEdit ? '' : 'none')}" class="shelf-title-btn-text"
+              @click="onEditClick">{{isEditMode ? '取消' : '编辑'}}</span>
       </div>
       <div class="shelf-title-btn-wrapper shelf-title-left" v-if="showBack">
         <span class="icon-back" @click="back"></span>
@@ -65,6 +65,9 @@
         return this.createPopupBtn(this.$t('shelf.cancel'), () => {
           this.hidePopup()
         })
+      },
+      isCanEdit () {
+        return this.shelfList && this.shelfList.length > 1
       }
     },
     watch: {

@@ -151,7 +151,6 @@ export default {
         })
 
         locations.forEach(item => {
-          console.log('itemitemitem===>>', item)
           let l = item.match(/\[(.*)\]!/)
           l = l && l[1]
           this.navigation.forEach(nav => {

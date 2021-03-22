@@ -6,11 +6,13 @@
   <transition name="popup-slide-up">
     <div class="popup-wrapper" v-show="visible">
       <div class="popup-title" v-if="title && title.length > 0">{{title}}</div>
-      <div class="popup-btn"
+      <div class="popup-btn-wrapper">
+        <div class="popup-btn"
            :class="{'danger':item.type==='danger'}"
            v-for="(item, index) in btn"
            :key="index"
            @click="item.click">{{item.text}}
+        </div>
       </div>
     </div>
   </transition>
@@ -73,25 +75,29 @@
       background: white;
       .popup-title {
         width: 100%;
-        height: px2rem(44);
+        height: px2rem(84);
         border-bottom: px2rem(1) solid #eee;
-        font-size: px2rem(12);
+        font-size: px2rem(18);
         line-height: px2rem(14);
         padding: px2rem(15);
         box-sizing: border-box;
-        color: #999;
+        color: #000;
+        font-weight: bold;
         @include center;
+      }
+      .popup-btn-wrapper {
+        display: flex;
       }
       .popup-btn {
         width: 100%;
         height: px2rem(60);
         border-bottom: px2rem(1) solid #eee;
-        font-size: px2rem(16);
+        font-size: px2rem(19);
         color: #666;
         font-weight: bold;
         @include center;
         &.danger {
-          color: $color-pink;
+          color: red;
         }
       }
     }

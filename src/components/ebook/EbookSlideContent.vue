@@ -7,7 +7,7 @@
         </div>
         <input class="slide-contents-search-input"
                type="text"
-               placeholder="搜索书籍内容"
+               placeholder="全文搜索"
                @click="showSearchPage()"
                v-model="searchText"
                @keyup.enter.exact="search()"

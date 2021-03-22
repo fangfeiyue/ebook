@@ -34,7 +34,7 @@
           //   index: 1
           // },
           {
-            label: '全本下载',
+            label: '下载到本地',
             label2: this.$t('shelf.delete'),
             index: 2
           },
@@ -174,16 +174,17 @@
       },
       showDownload() {
         this.popupMenu = this.popup({
-          title: this.isDownload ? this.$t('shelf.removeDownloadTitle') : this.$t('shelf.setDownloadTitle'),
+          title: this.isDownload ? '确定将所选书籍从本地删除吗？' : '确定将所选书籍下载到本地吗？',
           btn: [
             {
-              text: this.isDownload ? this.$t('shelf.delete') : this.$t('shelf.open'),
+              text: this.isDownload ? '删除' : '下载',
+              type: 'danger',
               click: () => {
                 this.setDownload()
               }
             },
             {
-              text: this.$t('shelf.cancel'),
+              text: '取消',
               click: () => {
                 this.hidePopup()
               }
@@ -192,24 +193,19 @@
         }).show()
       },
       showRemove() {
-        let title
-        if (this.shelfSelected.length === 1) {
-          title = this.$t('shelf.removeBookTitle').replace('$1', `《${this.shelfSelected[0].title}》`)
-        } else {
-          title = this.$t('shelf.removeBookTitle').replace('$1', this.$t('shelf.selectedBooks'))
-        }
+        let title = '确定将所选书籍移除书架吗？'
         this.popupMenu = this.popup({
           title: title,
           btn: [
             {
-              text: this.$t('shelf.removeBook'),
+              text: '移出',
               type: 'danger',
               click: () => {
                 this.removeSelected()
               }
             },
             {
-              text: this.$t('shelf.cancel'),
+              text: '取消',
               click: () => {
                 this.hidePopup()
               }

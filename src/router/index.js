@@ -37,7 +37,10 @@ const routes = [
     }, {
       path: 'detail',
       component: () => import('../views/store/StoreDetail.vue')
-    }]
+    }, {
+      path: 'category',
+      component: () => import('../views/store/StoreCategory.vue')
+    },]
   },
   {
     path: '/bookshelf',
