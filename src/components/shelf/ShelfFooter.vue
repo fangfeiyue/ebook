@@ -43,7 +43,7 @@
             index: 3
           },
           {
-            label: this.$t('shelf.remove'),
+            label: '移出书架',
             index: 4
           }
         ]
@@ -148,7 +148,15 @@
       },
       removeSelected() {
         this.shelfSelected.forEach(selected => {
-          this.setShelfList(this.shelfList.filter(book => book !== selected))
+          // this.setShelfList(this.shelfList.filter(book => book !== selected))
+          this.setShelfList(this.shelfList.filter(book => {
+            if (book.itemList) {
+              book.itemList = book.itemList.filter(subItem => {
+                return subItem !== selected
+              })
+            }
+            return book !== selected
+          }))
         })
         this.setShelfSelected([])
         this.onComplete()
