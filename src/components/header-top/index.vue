@@ -1,9 +1,18 @@
 <template>
   <div class="header-top">
-    <span class="icon-back icon1"></span>
+    <span class="icon-back icon1" @click="handleBack"></span>
     <span class="title">注册</span>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    handleBack() {
+      this.$router.back()
+    }
+  }
+}
+</script>
 <style lang="scss">
   @import '../../assets/global.scss';
   .header-top {
