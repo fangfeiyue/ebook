@@ -45,6 +45,18 @@ const routes = [
   {
     path: '/bookshelf',
     component: () => import('../views/bookshelf/index.vue')
+  },
+  {
+    path: '/my',
+    component: () => import('../views/my/index.vue')
+  },
+  {
+    path: '/register',
+    component: () => import('../views/register/index.vue')
+  },
+  {
+    path: '/login',
+    component: () => import('../views/login/index.vue')
   }
 ]
 
