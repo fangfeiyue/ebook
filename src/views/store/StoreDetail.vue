@@ -34,7 +34,7 @@
           </div>
         </div>
       </div> -->
-      <div class="book-detail-content-wrapper">
+      <!-- <div class="book-detail-content-wrapper">
         <div class="book-detail-content-title">试读</div>
         <div class="book-detail-content-list-wrapper">
           <div class="loading-text-wrapper" v-if="!this.displayed">
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div id="preview" v-show="this.displayed" ref="preview"></div>
-      </div>
+      </div> -->
       <div class="book-detail-content-wrapper">
         <div class="book-detail-content-title">{{$t('detail.navigation')}}</div>
         <div class="book-detail-content-list-wrapper">

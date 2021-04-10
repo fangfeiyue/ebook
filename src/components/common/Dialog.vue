@@ -72,7 +72,7 @@
       .dialog-btn-wrapper {
         display: flex;
         width: 100%;
-        background: $color-blue;
+        background: rgb(204, 85, 79);
         font-size: px2rem(14);
         font-weight: bold;
         color: white;

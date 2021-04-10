@@ -40,13 +40,13 @@ export default {
     getHome().then(res => {
       if (res && res.status === 200) {
         const data = res.data
-        const randomIndex = Math.floor(Math.random() * data.random.length)
-        this.banner = data.banner
-        this.featured = data.featured
+        // const randomIndex = Math.floor(Math.random() * data.random.length)
+        // this.banner = data.banner
+        // this.featured = data.featured
         this.recommend = data.recommend
         this.guessYouLike = data.guessYouLike
-        this.categoryList = data.categoryList
-        this.randomBook = data.random[randomIndex]
+        // this.categoryList = data.categoryList
+        // this.randomBook = data.random[randomIndex]
       }
       console.log('res', res)
     })

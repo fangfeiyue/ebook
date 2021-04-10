@@ -203,8 +203,9 @@
     padding: 0 px2rem(20);
     box-sizing: border-box;
     .dialog-input-title-wrapper {
-      font-size: px2rem(10);
+      font-size: px2rem(15);
       margin-top: px2rem(20);
+      font-weight: bold;
     }
     .dialog-input-wrapper {
       width: 100%;

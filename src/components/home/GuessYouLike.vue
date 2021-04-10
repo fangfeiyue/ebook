@@ -9,7 +9,7 @@
         <div class="content-wrapper">
           <div class="title title-big" ref="title">{{item.title}}</div>
           <div class="author sub-title" ref="author">{{item.author}}</div>
-          <div class="result third-title" ref="result">{{resultText(item)}}</div>
+          <!-- <div class="result third-title" ref="result">{{resultText(item)}}</div> -->
         </div>
       </div>
     </div>

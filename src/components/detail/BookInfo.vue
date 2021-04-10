@@ -50,6 +50,7 @@ export default {
       flex: 1;
       padding: px2rem(10) px2rem(15);
       box-sizing: border-box;
+      width: 69%;
       .detail-cover-title-wrapper {
         .cover-title-text {
           font-size: px2rem(24);
@@ -63,7 +64,7 @@ export default {
         .cover-author-text {
           font-size: px2rem(14);
           line-height: px2rem(16);
-          color: $color-blue;
+          color: red;
         }
       }
       .detail-cover-description-wrapper {

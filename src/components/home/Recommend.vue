@@ -8,7 +8,7 @@
         </div>
         <div class="content-wrapper">
           <div class="title title-medium" ref="title">{{item.title}}</div>
-          <div class="num sub-title" ref="num">{{$t('home.readers').replace('$1', item.readers)}}</div>
+          <!-- <div class="num sub-title" ref="num">{{$t('home.readers').replace('$1', item.readers)}}</div> -->
         </div>
       </div>
     </div>
@@ -67,6 +67,8 @@ export default {
           margin-top: px2rem(10);
           @include columnCenter;
           .title {
+            width: 100%;
+            @include ellipsis2(3);
             text-align: center;
           }
           .num {
