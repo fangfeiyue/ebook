@@ -74,6 +74,7 @@ export default {
     }
     span:last-child {
       color: #4c70e8;
+      // color: #fe564c;
       text-decoration: underline;
     }
   }
