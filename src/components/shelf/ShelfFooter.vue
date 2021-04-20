@@ -143,7 +143,7 @@
         } else {
           await this.downloadSelectedBook()
           saveBookShelf(this.shelfList)
-          this.simpleToast(this.$t('shelf.setDownloadSuccess'))
+          this.simpleToast('图书下载成功')
         }
       },
       removeSelected() {

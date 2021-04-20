@@ -20,12 +20,14 @@ export default {
         name: '书架',
         path: '/bookshelf',
         class: 'icon-shelf'
-      }, {
-        id: 'my',
-        name: '我的',
-        path: '/my',
-        class: 'icon-person'
-      }]
+      }
+      // , {
+      //   id: 'my',
+      //   name: '我的',
+      //   path: '/my',
+      //   class: 'icon-person'
+      // }
+      ]
     }
   },
   methods: {

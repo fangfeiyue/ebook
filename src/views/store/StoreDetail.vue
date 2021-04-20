@@ -4,7 +4,7 @@
     <!-- <detail-title @back="back"
                   :showShelf="true"
                   ref="title"></detail-title> -->
-    <div class="detail-title-wrapper" :class="{ 'hide-shadow': ifHideShadow }">
+    <div class="detail-title-wrapper">
       <div class="title-left-wrapper" @click="back">
         <span class="icon-back"></span>
       </div>
@@ -19,7 +19,7 @@
         <span>11</span>
       </div>
       <div class="title-text" v-if="title">
-        {{ title }}
+        <!-- {{ title }} -->
       </div>
     </div>
     <scroll

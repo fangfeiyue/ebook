@@ -44,7 +44,7 @@ export default {
         // this.banner = data.banner
         // this.featured = data.featured
         this.recommend = data.recommend
-        this.guessYouLike = data.guessYouLike
+        this.guessYouLike = data.guess
         // this.categoryList = data.categoryList
         // this.randomBook = data.random[randomIndex]
       }

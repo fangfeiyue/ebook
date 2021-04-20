@@ -12,7 +12,7 @@
           <span>进度</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 1}">
-          <span class="icon-private" @click="setTheme(3)"></span>
+          <span class="icon-private" @click="setEyesModel"></span>
           <span>护眼</span>
         </div>
         <div class="icon-wrapper" :class="{'selected': settingVisible === 0}">
@@ -51,6 +51,9 @@ export default {
   methods: {
     showSetting (key) {
       this.setSettingVisible(key)
+    },
+    setEyesModel() {
+      this.setTheme(3)
     },
     setTheme (index) {
       const theme = this.themeList[index]

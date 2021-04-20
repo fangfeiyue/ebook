@@ -11,19 +11,9 @@
     </button> -->
     <div class="avatar-container avatar-position">
       <!-- <img src="../../assets/images/my.png" class="avatar" /> -->
-      <img src="https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132"" class="avatar" />
+      <img src="https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132" class="avatar" />
       <span class="nick-name">可爱的宝宝</span>
     </div>
-    <!-- <div class="about-container">
-      <div class="about-us">
-        <span class="icon-progress book-num"></span>
-        <span class="description">关于我们</span>
-      </div>
-      <div class="about-us">
-        <span class="book-num">1</span>
-        <span class="description">喜欢的书</span>
-      </div>
-    </div> -->
     <div class="item-box">
       <div class="item">
         <span>收藏的图书</span>
@@ -33,10 +23,10 @@
         <span>关于我们</span>
         <span class="icon-forward"></span>
       </div>
-      <div class="item">
+      <!-- <div class="item">
         <span>清除缓存</span>
         <span class="icon-forward"></span>
-      </div>
+      </div> -->
     </div>
     <footer-guide />
   </div>

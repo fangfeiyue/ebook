@@ -6,7 +6,7 @@ import i18n from './lang/index'
 import './assets/styles/icon.css'
 import './assets/global.scss'
 import './utils/create-api'
-import './mock/index.js'
+// import './mock/index.js'
 
 /* eslint-disable no-extend-native */
 Array.prototype.pushWithoutDuplicate = function () {

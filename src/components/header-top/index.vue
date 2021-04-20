@@ -1,11 +1,14 @@
 <template>
   <div class="header-top">
     <span class="icon-back icon1" @click="handleBack"></span>
-    <span class="title">注册</span>
+    <span class="title">{{title}}</span>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    title: String
+  },
   methods: {
     handleBack() {
       this.$router.back()
@@ -21,7 +24,7 @@ export default {
     // justify-content: center;
     box-shadow: 0 0 px2rem(5) 0 rgba(0, 0, 0, 0.09);
     height: px2rem(46);
-    background-color: #fff;
+    background-color: #f5f5f5;
     position: fixed;
     z-index: 100;
     left: 0;

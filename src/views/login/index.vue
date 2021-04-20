@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <header-top />
+    <header-top title="登录"/>
     <div class="register-box">
       <div class="item">
         <span>邮箱：</span>
@@ -37,6 +37,7 @@ export default {
   background-color: #fff;
   width: 100%;
   height: 100%;
+  background-color: #f5f5f5;
   .register-box {
     width: 100%;
     box-sizing: border-box;

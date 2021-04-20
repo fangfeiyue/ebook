@@ -125,7 +125,7 @@
             group.itemList.forEach((item, index) => {
               item.id = index + 1
             })
-            this.simpleToast(this.$t('shelf.moveBookInSuccess').replace('$1', group.title))
+            this.simpleToast('成功移入'.replace('$1', group.title))
             this.onComplete()
           })
       },
