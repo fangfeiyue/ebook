@@ -15,7 +15,7 @@
           @click="showBookShelf"
         ></span> -->
         <!-- <span class="icon-share"></span> -->
-        <img src="../../assets/images/like.png" alt="" />
+        <img @click="handleCollect" src="../../assets/images/like.png" alt="" />
         <span>11</span>
       </div>
       <div class="title-text" v-if="title">
@@ -152,6 +152,7 @@ import {
   removeFromBookShelf,
   addToShelf,
 } from "../../utils/utils";
+import { login } from "../../api/user";
 import { storeShelfMixin } from "../../mixin/shelfMixin";
 import Epub from "epubjs";
 
@@ -246,6 +247,18 @@ export default {
     };
   },
   methods: {
+    handleCollect() {
+      if (true) {
+        this.$router.push('/login?store/detail?category=5&fileName=区块链技术指南')
+      }
+      return
+
+      login({
+        account: "2949255722@qq.com",
+        type: 101,
+        secret: "sdfe423",
+      });
+    },
     addOrRemoveShelf() {
       console.log("加入书架", this.inBookShelf, this.bookItem, getBookShelf());
       // 如果电子书存在于书架，则从书架中移除电子书

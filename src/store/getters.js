@@ -26,7 +26,9 @@ const book = {
   isEditMode: state => state.home.isEditMode,
   hotSearchOffsetY: state => state.home.hotSearchOffsetY,
   speakingIconBottom: state => state.book.speakingIconBottom,
-  flapCardVisible: state => state.home.flapCardVisible
+  flapCardVisible: state => state.home.flapCardVisible,
+
+  isAuth: state => state.user.isAuth,
 }
 
 export default book

@@ -307,3 +307,12 @@ export function dateFormat(fmt, date) {
   };
   return fmt;
 }
+
+
+export function saveToken(token) {
+  return setLocalStorage('token', token)
+}
+
+export function getToken() {
+  return getLocalStorage('token')
+}

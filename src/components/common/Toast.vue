@@ -76,7 +76,7 @@ export default {
         line-height: px2rem(20);
         padding: px2rem(10) px2rem(20);
         box-sizing: border-box;
-        background: #ccc;
+        background-color: rgba(0, 0, 0, 0.6);
         border-radius: px2rem(10);
         font-size: px2rem(14);
         color: white;

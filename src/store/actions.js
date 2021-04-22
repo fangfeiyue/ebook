@@ -1,3 +1,5 @@
+import { login } from '../api/user'
+import { saveToken, getToken } from '../utils/utils'
 const actions = {
   setFileName ({ commit }, fileName) {
     return commit('setFileName', fileName)
@@ -82,6 +84,21 @@ const actions = {
   },
   setFlapCardVisible ({ commit }, flapCardVisible) {
     return commit('setFlapCardVisible', flapCardVisible)
+  },
+
+  async login({ commit }, payload) {
+    try {
+      const res = await login(payload)
+      if (res && res.token) {
+        saveToken(res.token)
+      }
+      commit('setAuth', true)
+      return res
+    } catch(err) {
+      saveToken('token', '')
+      commit('setAuth', false)
+      throw err
+    }
   }
 }
 

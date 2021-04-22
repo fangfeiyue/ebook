@@ -4,27 +4,47 @@
     <div class="register-box">
       <div class="item">
         <span>邮箱：</span>
-        <input type="text" placeholder="请输入邮箱" />
+        <input type="text" placeholder="请输入邮箱" v-model="account" />
       </div>
       <div class="item">
         <span>密码：</span>
-        <input type="text" placeholder="请输入密码" />
+        <input type="text" placeholder="请输入密码" v-model="secret" />
       </div>
       <div class="tip">
         <span>没有账号？</span>
         <span @click="register">去注册</span>
       </div>
-      <div class="btn">登录</div>
+      <div class="btn" @click="handleLogin">登录</div>
     </div>
   </div>
 </template>
 <script>
 import HeaderTop from "../../components/header-top/index";
+import { userMixin } from '../../mixin/user'
 export default {
+  mixins: [userMixin],
   components: {
-    HeaderTop,
+    HeaderTop
+  },
+  data() {
+    return {
+      account: '2949255722@qq.com',
+      secret: 'sdfe423'
+    }
   },
   methods: {
+    handleLogin() {
+      this.account = this.account.trim()
+      this.secret = this.secret.trim()
+
+      this.login({
+        account: this.account,
+        secret: this.secret
+      }).catch(err => {
+        this.simpleToast('请仔细核对账号或密码')
+      })
+
+    },
     register() {
       this.$router.push('/register')
     }
