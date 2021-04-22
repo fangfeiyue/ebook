@@ -4,15 +4,15 @@
     <div class="register-box">
       <div class="item">
         <span>昵称：</span>
-        <input type="text" placeholder="请输入昵称" />
+        <input type="text" placeholder="请输入昵称" v-model="nickName" />
       </div>
       <div class="item">
         <span>邮箱：</span>
-        <input type="text" placeholder="请输入邮箱" />
+        <input type="text" placeholder="请输入邮箱" v-model="email" />
       </div>
       <div class="item">
         <span>密码：</span>
-        <input type="text" placeholder="请输入密码" />
+        <input type="text" placeholder="请输入密码" v-model="pwd" />
       </div>
       <!-- <div class="item">
         <span>确认密码：</span>
@@ -20,20 +20,42 @@
       </div> -->
             <div class="tip">
         <span>已有账号 </span>
-        <span @click="login">去登录</span>
+        <span @click="goLogin">去登录</span>
       </div>
-      <div class="btn">注册</div>
+      <div class="btn" @click="register">注册</div>
     </div>
   </div>
 </template>
 <script>
 import HeaderTop from "../../components/header-top/index";
+import { register } from '../../api/user'
 export default {
   components: {
     HeaderTop,
   },
+  data() {
+    return {
+      pwd: '',
+      email: '',
+      nickName: '',
+    }
+  },
   methods: {
-    login() {
+    register() {
+      register({
+        email: this.email,
+        password1: this.pwd,
+        password2: this.pwd,
+        nickname: this.nickName
+      }).then(res => {
+        this.simpleToast('恭喜您，注册成功')
+        // this.$router.replace('/login')
+      }).catch(err => {
+        console.log('errr', err)
+        this.simpleToast('请仔细核对账号或密码')
+      })
+    },
+    goLogin() {
       this.$router.push('/login')
     }
   }
