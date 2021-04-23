@@ -72,18 +72,22 @@
           <router-link to="/comment/2"><span>写评论</span></router-link>
         </div>
         <div class="comment">
-          <div class="comment-item" @click="sendComment">
-            <span>这本书很棒</span>
-            <span>+100</span>
-          </div>
-          <div class="comment-item">
-            <span>特别好的一本书</span>
-            <span>+89</span>
-          </div>
-          <div class="comment-item">
-            <span>超赞</span>
-            <span>+78</span>
-          </div>
+          <template v-if="commentList.length > 0">
+            <div
+              v-for="(item, index) in commentList"
+              :key="index"
+              class="comment-item"
+              @click="sendComment"
+            >
+              <span>{{ item.content }}</span>
+              <span>+{{ item.nums }}</span>
+            </div>
+          </template>
+          <span
+            class="tip"
+            v-else
+            >暂无评论</span
+          >
         </div>
       </div>
       <div class="book-detail-content-wrapper">
@@ -162,6 +166,7 @@ import {
   unCollect,
   getCollectStatus,
   sendComment,
+  getComment,
 } from "../../api/user";
 import { storeShelfMixin } from "../../mixin/shelfMixin";
 import Epub from "epubjs";
@@ -174,7 +179,7 @@ export default {
     DetailTitle,
     Scroll,
     BookInfo,
-    Toast
+    Toast,
   },
   computed: {
     // 获取电子书摘要
@@ -256,16 +261,25 @@ export default {
       opf: null,
       isCollect: false,
       fav_nums: 0,
+      commentList: [],
       likeImg: require("../../assets/images/like.png"),
       unLikeImg: require("../../assets/images/like@dis.png"),
     };
   },
   methods: {
-    sendComment() {
-      sendComment({
-        book_id: 2,
-        content: "春风十里不如有你春",
-      });
+    async sendComment(e) {
+      const content = e.target.innerText
+      try {
+        await sendComment({
+          book_id: 2,
+          content
+        });
+
+        this.simpleToast("点赞成功");
+        this.getComment()
+      }catch(err) {
+        this.simpleToast("点赞失败");
+      }
     },
     async collect() {
       try {
@@ -504,8 +518,16 @@ export default {
         this.isCollect = false;
       }
     },
+    async getComment() {
+      try {
+        const res = await getComment();
+        this.commentList = res && res.comments || [];
+        this.commentList = this.commentList.slice(0, 10)
+      } catch (err) {
+        console.log("comment", res);
+      }
+    },
   },
-
   mounted() {
     this.init();
     if (!this.shelfList || this.shelfList.length === 0) {
@@ -513,6 +535,7 @@ export default {
     }
 
     this.getCollectStatus();
+    this.getComment();
   },
 };
 </script>
@@ -539,6 +562,11 @@ export default {
         font-weight: bold;
         padding: px2rem(20) px2rem(15) px2rem(10) px2rem(15);
         box-sizing: border-box;
+        a {
+          font-size: px2rem(13);
+          text-decoration: none;
+          color: #ca5651;
+        }
       }
       .comment {
         display: flex;
@@ -572,6 +600,13 @@ export default {
             color: #aaa;
           }
         }
+      }
+      .tip {
+        width: 100%;
+        text-align: center;
+        color: #dcdcdc;
+        font-size: px2rem(16);
+        height: px2rem(50);
       }
     }
     .book-detail-content-wrapper {

@@ -6,3 +6,4 @@ export const collect = options => axios.post('http://localhost:3000/v1/like', op
 export const unCollect = options => axios.post('http://localhost:3000/v1/like/cancel', options)
 export const getCollectStatus = options => axios.get('http://localhost:3000/v1/book/2/favor', options)
 export const sendComment = options => axios.post('http://localhost:3000/v1/book/add/short_comment', options)
+export const getComment = options => axios.get('http://localhost:3000/v1/book/2/short_comment', options)

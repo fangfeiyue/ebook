@@ -64,7 +64,7 @@ export default {
         .cover-author-text {
           font-size: px2rem(14);
           line-height: px2rem(16);
-          color: red;
+          color: #ca5651;
         }
       }
       .detail-cover-description-wrapper {
