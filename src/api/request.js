@@ -1,4 +1,17 @@
 import axios from 'axios'
+import {
+  Base64
+} from 'js-base64'
+import { getToken } from '../utils/utils'
+
+function _encode() {
+  // account:password
+  // token
+  // token:
+  const token = wx.getStorageSync('token')
+  const base64 = Base64.encode(token + ':')
+  return 'Basic ' + base64
+}
 
 export default new class HttpRequest {
   constructor() {
@@ -13,7 +26,10 @@ export default new class HttpRequest {
   }
   setInterceptors(instance) {
     instance.interceptors.request.use(config => {
-      // config.headers.authorization = ''
+      const token = getToken()
+      const base64 = Base64.encode(token + ':')
+      console.log('token', base64)
+      config.headers.Authorization = 'Basic ' + base64
       return config
     })
     instance.interceptors.response.use(res => {
@@ -22,6 +38,7 @@ export default new class HttpRequest {
       }
       return Promise.reject(res.data.data)
     }, err => {
+      console.log(err)
       this.handleErrStatus(err.response.status)
       return Promise.reject(err)
     })

@@ -8,15 +8,16 @@
       <div class="title-left-wrapper" @click="back">
         <span class="icon-back"></span>
       </div>
-      <div class="title-right-wrapper">
+      <div class="title-right-wrapper" @click="handleCollect">
         <!-- <span
           class="icon-shelf icon"
           v-if="showShelf"
           @click="showBookShelf"
         ></span> -->
         <!-- <span class="icon-share"></span> -->
-        <img @click="handleCollect" src="../../assets/images/like.png" alt="" />
-        <span>11</span>
+        <!-- <img :src="isCollect  ? '../../assets/images/like.png':'../../assets/images/like@dis.png'" alt="" /> -->
+        <img :src="isCollect  ? likeImg : unLikeImg " alt="" />
+        <span>{{fav_nums}}</span>
       </div>
       <div class="title-text" v-if="title">
         <!-- {{ title }} -->
@@ -152,7 +153,7 @@ import {
   removeFromBookShelf,
   addToShelf,
 } from "../../utils/utils";
-import { login } from "../../api/user";
+import { login, collect, unCollect, getCollectStatus } from "../../api/user";
 import { storeShelfMixin } from "../../mixin/shelfMixin";
 import Epub from "epubjs";
 
@@ -244,20 +245,54 @@ export default {
       trialText: null,
       categoryText: null,
       opf: null,
+      isCollect: false,
+      fav_nums: 0,
+      likeImg: require('../../assets/images/like.png'),
+      unLikeImg: require('../../assets/images/like@dis.png')
     };
   },
   methods: {
-    handleCollect() {
-      if (true) {
-        this.$router.push('/login?store/detail?category=5&fileName=区块链技术指南')
+    async collect() {
+      try {
+        const res = await collect({
+          art_id: 2,
+          type: 400,
+        });
+        this.simpleToast("收藏成功");
+      } catch (err) {
+        this.simpleToast("收藏失败");
       }
-      return
+    },
+    async unCollect() {
+      try {
+        await unCollect({
+          art_id: 2,
+          type: 400,
+        });
+        this.simpleToast("已取消收藏");
+      } catch (err) {
+        this.simpleToast("取消收藏失败");
+      }
+    },
+    async handleCollect() {
+      if (this.isCollect) {
+        await this.unCollect();
+      } else {
+        await this.collect();
+      }
+      this.isCollect = !this.isCollect;
+      this.getCollectStatus()
 
-      login({
-        account: "2949255722@qq.com",
-        type: 101,
-        secret: "sdfe423",
-      });
+      // if (true) {
+      //   this.$router.push('/login?store/detail?category=5&fileName=区块链技术指南')
+      // }
+      // return
+
+      // login({
+      //   account: "2949255722@qq.com",
+      //   type: 101,
+      //   secret: "sdfe423",
+      // });
     },
     addOrRemoveShelf() {
       console.log("加入书架", this.inBookShelf, this.bookItem, getBookShelf());
@@ -444,12 +479,25 @@ export default {
       //   this.$refs.title.hideShadow();
       // }
     },
+    async getCollectStatus() {
+      try {
+        let res = await getCollectStatus();
+        const status = res && res.like_status
+        this.isCollect = status ? true : false
+        this.fav_nums = res && res.fav_nums
+      } catch (err) {
+        this.isCollect = false;
+      }
+    },
   },
+
   mounted() {
     this.init();
     if (!this.shelfList || this.shelfList.length === 0) {
       this.getShelfList();
     }
+
+    this.getCollectStatus();
   },
 };
 </script>
