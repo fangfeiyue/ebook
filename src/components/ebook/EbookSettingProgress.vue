@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-up">
-    <div class="setting-wrapper" v-show="menuVisible && settingVisible === 2">
+    <div class="setting-wrapper" v-show="true" style="background-color:red;">
       <div class="setting-progress">
         <!-- <div class="text-wrapper">
           <span class="progress-section-text">{{sectionName}}</span>

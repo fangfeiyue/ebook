@@ -57,6 +57,10 @@ const routes = [
   {
     path: '/login',
     component: () => import('../views/login/index.vue')
+  },
+  {
+    path: '/comment/:id',
+    component: () => import('../views/comment/index.vue')
   }
 ]
 

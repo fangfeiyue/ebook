@@ -16,8 +16,8 @@
         ></span> -->
         <!-- <span class="icon-share"></span> -->
         <!-- <img :src="isCollect  ? '../../assets/images/like.png':'../../assets/images/like@dis.png'" alt="" /> -->
-        <img :src="isCollect  ? likeImg : unLikeImg " alt="" />
-        <span>{{fav_nums}}</span>
+        <img :src="isCollect ? likeImg : unLikeImg" alt="" />
+        <span>{{ fav_nums }}</span>
       </div>
       <div class="title-text" v-if="title">
         <!-- {{ title }} -->
@@ -67,9 +67,12 @@
         <div id="preview" v-show="this.displayed" ref="preview"></div>
       </div> -->
       <div class="book-detail-comment-wrapper">
-        <div class="book-detail-content-title">评论</div>
+        <div class="book-detail-content-title">
+          <span>评论</span>
+          <router-link to="/comment/2"><span>写评论</span></router-link>
+        </div>
         <div class="comment">
-          <div class="comment-item">
+          <div class="comment-item" @click="sendComment">
             <span>这本书很棒</span>
             <span>+100</span>
           </div>
@@ -153,7 +156,13 @@ import {
   removeFromBookShelf,
   addToShelf,
 } from "../../utils/utils";
-import { login, collect, unCollect, getCollectStatus } from "../../api/user";
+import {
+  login,
+  collect,
+  unCollect,
+  getCollectStatus,
+  sendComment,
+} from "../../api/user";
 import { storeShelfMixin } from "../../mixin/shelfMixin";
 import Epub from "epubjs";
 
@@ -165,7 +174,7 @@ export default {
     DetailTitle,
     Scroll,
     BookInfo,
-    Toast,
+    Toast
   },
   computed: {
     // 获取电子书摘要
@@ -247,11 +256,17 @@ export default {
       opf: null,
       isCollect: false,
       fav_nums: 0,
-      likeImg: require('../../assets/images/like.png'),
-      unLikeImg: require('../../assets/images/like@dis.png')
+      likeImg: require("../../assets/images/like.png"),
+      unLikeImg: require("../../assets/images/like@dis.png"),
     };
   },
   methods: {
+    sendComment() {
+      sendComment({
+        book_id: 2,
+        content: "春风十里不如有你春",
+      });
+    },
     async collect() {
       try {
         const res = await collect({
@@ -281,7 +296,7 @@ export default {
         await this.collect();
       }
       this.isCollect = !this.isCollect;
-      this.getCollectStatus()
+      this.getCollectStatus();
 
       // if (true) {
       //   this.$router.push('/login?store/detail?category=5&fileName=区块链技术指南')
@@ -482,9 +497,9 @@ export default {
     async getCollectStatus() {
       try {
         let res = await getCollectStatus();
-        const status = res && res.like_status
-        this.isCollect = status ? true : false
-        this.fav_nums = res && res.fav_nums
+        const status = res && res.like_status;
+        this.isCollect = status ? true : false;
+        this.fav_nums = res && res.fav_nums;
       } catch (err) {
         this.isCollect = false;
       }
@@ -518,6 +533,8 @@ export default {
       border-bottom: px2rem(1) solid #eee;
       box-sizing: border-box;
       .book-detail-content-title {
+        display: flex;
+        justify-content: space-between;
         font-size: px2rem(20);
         font-weight: bold;
         padding: px2rem(20) px2rem(15) px2rem(10) px2rem(15);
